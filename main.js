@@ -48,11 +48,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ─── Typed Tagline ───
     const taglines = [
-        'Creative Developer',
-        'UI/UX Enthusiast',
-        'Problem Solver',
-        'Tech Explorer',
-        'Code Artisan',
+        'AI Solutions Architect',
+        'Data-Driven Developer',
+        'Python & SQL Specialist',
+        'Quality Assurance Expert',
+        'Creative Problem Solver',
     ];
     const typedEl = document.getElementById('typed-tagline');
     if (typedEl) {
