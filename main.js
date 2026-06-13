@@ -230,7 +230,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // ─── Contact Form (Demo Handler) ───
+    // ─── Contact Form (Actual Formsubmit Handler) ───
     const contactForm = document.getElementById('contact-form');
     if (contactForm) {
         contactForm.addEventListener('submit', (e) => {
@@ -241,7 +241,19 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.disabled = true;
             btn.style.opacity = '0.7';
 
-            setTimeout(() => {
+            const formData = new FormData(contactForm);
+            const data = Object.fromEntries(formData.entries());
+
+            fetch("https://formsubmit.co/ajax/rainietan09022006@gmail.com", {
+                method: "POST",
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(result => {
                 btn.innerHTML = '<span class="code-fn" style="color: #34d399;">✓ messageSent</span><span class="code-paren">()</span>';
                 setTimeout(() => {
                     btn.innerHTML = original;
@@ -249,7 +261,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     btn.style.opacity = '1';
                     contactForm.reset();
                 }, 2500);
-            }, 1500);
+            })
+            .catch(error => {
+                console.error(error);
+                btn.innerHTML = '<span class="code-fn" style="color: #f87171;">✗ error</span><span class="code-paren">()</span>';
+                setTimeout(() => {
+                    btn.innerHTML = original;
+                    btn.disabled = false;
+                    btn.style.opacity = '1';
+                }, 2500);
+            });
         });
     }
 
