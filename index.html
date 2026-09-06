@@ -159,7 +159,7 @@
                     </p>
                     <div class="about-stats">
                         <div class="stat-card glass-card">
-                            <span class="stat-number" data-target="2">0</span><span class="stat-suffix"></span>
+                            <span class="stat-number" data-target="3">0</span><span class="stat-suffix"></span>
                             <span class="stat-label">Projects</span>
                         </div>
                         <div class="stat-card glass-card">
@@ -332,6 +332,29 @@
                         <p>A visual-centric platform showcasing artistic perspectives through high-quality digital
                             imagery and storytelling — a hub for sharing techniques, organizing photo walks, and
                             bridging camera mastery with creative expression.</p>
+
+                    </div>
+                </article>
+
+                <!-- Project 3: NotifyLeave -->
+                <article class="project-card glass-card reveal-up" id="notifyleave-card"
+                    style="cursor: pointer; animation-delay: 0.3s"
+                    onclick="document.getElementById('notifyleave-modal').classList.add('active'); document.body.style.overflow='hidden';">
+                    <div class="project-image-wrapper">
+                        <img src="images/notifyleave_Webpage.png"
+                            alt="NotifyLeave — Streamlined Leave Management" class="project-image" />
+                        <div class="project-overlay">
+                            <span class="project-view">View Details</span>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="tag">React</span>
+                            <span class="tag">Node.js</span>
+                            <span class="tag">MySQL</span>
+                        </div>
+                        <h3>NotifyLeave</h3>
+                        <p>A comprehensive platform where employees apply for leave, managers approve it through a structured two-tier workflow, and HR administrators manage policies, holidays, and permissions.</p>
 
                     </div>
                 </article>
@@ -646,6 +669,70 @@
                         <p>This project was completed alongside the <strong>IBM SkillsBuild Web Development
                                 Fundamentals</strong>, ensuring that development practices aligned with
                             industry-standard badges in UX and Web Design.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================== NOTIFYLEAVE MODAL ===================== -->
+    <div id="notifyleave-modal" class="project-modal">
+        <div class="project-modal-overlay"
+            onclick="document.getElementById('notifyleave-modal').classList.remove('active'); document.body.style.overflow='';">
+        </div>
+        <div class="project-modal-content glass-card">
+            <button class="modal-close"
+                onclick="document.getElementById('notifyleave-modal').classList.remove('active'); document.body.style.overflow='';"
+                aria-label="Close modal">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+            </button>
+            <div class="modal-body">
+                <div class="modal-image">
+                    <img src="images/notifyleave_Webpage.png" alt="NotifyLeave Platform Preview" />
+                </div>
+                <div class="modal-details">
+                    <h2 class="modal-title">NotifyLeave</h2>
+                    <div class="modal-tags">
+                        <span class="tag">React</span>
+                        <span class="tag">Tailwind CSS</span>
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">Node.js</span>
+                        <span class="tag">Express</span>
+                        <span class="tag">MySQL</span>
+                    </div>
+
+                    <div class="modal-section">
+                        <h3>Project Overview</h3>
+                        <p><strong>Mission:</strong> To simplify and streamline leave management for organizations through a transparent, automated, and configurable system.</p>
+                        <p><strong>Core Concept:</strong> A comprehensive platform where employees apply for leave, managers approve it through a structured two-tier workflow, and HR administrators manage policies, holidays, and permissions.</p>
+                        <p><strong>Key Impact:</strong> Eliminates administrative overhead, ensures fair policy enforcement, and provides clear visibility into team availability for better operational continuity.</p>
+                    </div>
+
+                    <div class="modal-section">
+                        <h3>The Problem &amp; Solution</h3>
+                        <p><strong>Challenge:</strong> Managing employee leave manually or through fragmented systems leads to administrative bottlenecks, inaccurate balance tracking, and a lack of real-time visibility into team coverage and headcount shortages.</p>
+                        <p><strong>Solution:</strong> A centralized, automated web application with a robust Role-Based Access Control (RBAC) system that seamlessly handles requests, approvals, balance ledgers, and manpower metrics.</p>
+                    </div>
+
+                    <div class="modal-section">
+                        <h3>Key Technical Features</h3>
+                        <ul class="modal-features">
+                            <li><strong>Two-Tier Approval Workflow</strong> — Automated routing of leave requests up the management chain, intelligently skipping managers who are on leave themselves.</li>
+                            <li><strong>Dynamic Leave Ledger</strong> — An append-only balance journal that accurately tracks allocations, usage, carry-overs, and refunds for precise and reliable auditing.</li>
+                            <li><strong>Role-Based Access Control (RBAC)</strong> — Fine-grained, data-driven permission matrix tailored for Employees, Supervisors, Managers, and HR Admins.</li>
+                            <li><strong>Manpower Metrics &amp; Calendars</strong> — Real-time department coverage dashboards and team calendars that flag potential headcount shortages during the approval process.</li>
+                            <li><strong>Region-Aware Configurations</strong> — Supports multi-regional workforces by seamlessly incorporating region-specific public holidays and tailored leave policies.</li>
+                        </ul>
+                    </div>
+
+                    <div class="modal-section">
+                        <h3>Outcome &amp; Value</h3>
+                        <p><strong>For Employees:</strong> A frictionless, intuitive experience to request time off, view balances, and track approval statuses.</p>
+                        <p><strong>For Managers:</strong> Context-rich approval screens equipped with advisory flags about team overlaps and coverage, empowering informed decision-making.</p>
+                        <p><strong>Organizational Goal:</strong> Empowering teams with a transparent, reliable, and efficient system so that operational continuity is never compromised.</p>
                     </div>
                 </div>
             </div>
