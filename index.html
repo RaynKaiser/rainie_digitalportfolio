@@ -59,12 +59,26 @@
     </script>
     
     <style>
-        /* Base & Background */
-        body {
+        /* Custom 4-Dot Diamond Reticle Cursor */
+        html, body {
             background-color: #f0f9ff;
             color: #334155;
             overflow-x: hidden;
-            cursor: crosshair;
+            cursor: url("images/cursor.png") 12 12, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='6' r='3.8' fill='rgba(15,23,42,0.85)'/%3E%3Ccircle cx='12' cy='18' r='3.8' fill='rgba(15,23,42,0.85)'/%3E%3Ccircle cx='6' cy='12' r='3.8' fill='rgba(15,23,42,0.85)'/%3E%3Ccircle cx='18' cy='12' r='3.8' fill='rgba(15,23,42,0.85)'/%3E%3Ccircle cx='12' cy='6' r='2.8' fill='%23ffffff'/%3E%3Ccircle cx='12' cy='18' r='2.8' fill='%23ffffff'/%3E%3Ccircle cx='6' cy='12' r='2.8' fill='%23ffffff'/%3E%3Ccircle cx='18' cy='12' r='2.8' fill='%23ffffff'/%3E%3C/svg%3E") 12 12, auto;
+        }
+
+        /* Interactive Pointer Reticle (Cyan Glow on Project Cards, Buttons & Links) */
+        a, a *,
+        button, button *,
+        .cursor-pointer, .cursor-pointer *,
+        [onclick], [onclick] *,
+        input[type="submit"], input[type="button"] {
+            cursor: url("images/cursor-pointer.png") 12 12, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='6' r='4' fill='rgba(2,132,199,0.9)'/%3E%3Ccircle cx='12' cy='18' r='4' fill='rgba(2,132,199,0.9)'/%3E%3Ccircle cx='6' cy='12' r='4' fill='rgba(2,132,199,0.9)'/%3E%3Ccircle cx='18' cy='12' r='4' fill='rgba(2,132,199,0.9)'/%3E%3Ccircle cx='12' cy='6' r='2.8' fill='%2338bdf8'/%3E%3Ccircle cx='12' cy='18' r='2.8' fill='%2338bdf8'/%3E%3Ccircle cx='6' cy='12' r='2.8' fill='%2338bdf8'/%3E%3Ccircle cx='18' cy='12' r='2.8' fill='%2338bdf8'/%3E%3C/svg%3E") 12 12, pointer !important;
+        }
+
+        /* Allow natural text cursor in input fields */
+        input:not([type="submit"]):not([type="button"]), textarea {
+            cursor: text !important;
         }
 
         /* Tactical Dot Grid Overlay - Softer for light theme */
@@ -271,37 +285,37 @@
         /* Custom Selection */
         ::selection { background: #bae6fd; color: #0f172a; }
 
-        /* Targeting UI Reticles on Project Cards */
+        /* Targeting UI Reticles on Project Cards - Aligned to Box */
         .target-reticle {
             position: absolute;
-            inset: 0;
-            border: 1px solid #7dd3fc;
+            inset: -3px;
+            border: 1px solid rgba(56, 189, 248, 0.45);
             opacity: 0;
-            transform: scale(0.97);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             pointer-events: none;
-            z-index: 20;
-            border-radius: 1rem;
+            z-index: 25;
+            border-radius: 0.95rem;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
         }
         .group:hover .target-reticle {
             opacity: 1;
-            transform: scale(1);
+            transform: translateY(-0.5rem);
         }
         .target-reticle .bracket-tl {
-            position: absolute; top: -2px; left: -2px; width: 22px; height: 22px;
-            border-top: 2px solid #0284c7; border-left: 2px solid #0284c7; border-top-left-radius: 6px;
+            position: absolute; top: -2px; left: -2px; width: 20px; height: 20px;
+            border-top: 2px solid #0284c7; border-left: 2px solid #0284c7; border-top-left-radius: 8px;
         }
         .target-reticle .bracket-tr {
-            position: absolute; top: -2px; right: -2px; width: 22px; height: 22px;
-            border-top: 2px solid #0284c7; border-right: 2px solid #0284c7; border-top-right-radius: 6px;
+            position: absolute; top: -2px; right: -2px; width: 20px; height: 20px;
+            border-top: 2px solid #0284c7; border-right: 2px solid #0284c7; border-top-right-radius: 8px;
         }
         .target-reticle .bracket-bl {
-            position: absolute; bottom: -2px; left: -2px; width: 22px; height: 22px;
-            border-bottom: 2px solid #0284c7; border-left: 2px solid #0284c7; border-bottom-left-radius: 6px;
+            position: absolute; bottom: -2px; left: -2px; width: 20px; height: 20px;
+            border-bottom: 2px solid #0284c7; border-left: 2px solid #0284c7; border-bottom-left-radius: 8px;
         }
         .target-reticle .bracket-br {
-            position: absolute; bottom: -2px; right: -2px; width: 22px; height: 22px;
-            border-bottom: 2px solid #0284c7; border-right: 2px solid #0284c7; border-bottom-right-radius: 6px;
+            position: absolute; bottom: -2px; right: -2px; width: 20px; height: 20px;
+            border-bottom: 2px solid #0284c7; border-right: 2px solid #0284c7; border-bottom-right-radius: 8px;
         }
 
         /* Ethereal Modal Styles */
@@ -334,8 +348,10 @@
             max-width: 54rem;
             width: 100%;
             max-height: 90vh;
-            overflow-y: auto;
-            background: rgba(255, 255, 255, 0.94);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden; /* Clips strictly within rounded container so corners are pristine */
+            background: rgba(255, 255, 255, 0.96);
             backdrop-filter: blur(25px);
             -webkit-backdrop-filter: blur(25px);
             border: 1px solid rgba(255, 255, 255, 0.95);
@@ -348,19 +364,88 @@
             transform: scale(1) translateY(0);
         }
 
-        /* Custom scrollbar for modals */
-        .project-modal-content::-webkit-scrollbar {
-            width: 6px;
+        /* Inner scroll container inset from rounded corners */
+        .project-modal-scroll {
+            width: 100%;
+            height: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            overflow-x: hidden;
+            margin: 14px 4px 14px 0;
+            padding: 1.25rem 1.75rem 1.5rem 1.75rem;
         }
-        .project-modal-content::-webkit-scrollbar-track {
-            background: rgba(241, 245, 249, 0.5);
+
+        /* Custom scrollbar with only outer top and bottom arrows */
+        .project-modal-scroll::-webkit-scrollbar {
+            width: 12px;
         }
-        .project-modal-content::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
+
+        /* Hide all inner scrollbar buttons / secondary steppers */
+        .project-modal-scroll::-webkit-scrollbar-button:start:increment,
+        .project-modal-scroll::-webkit-scrollbar-button:end:decrement,
+        .project-modal-scroll::-webkit-scrollbar-button:vertical:start:increment,
+        .project-modal-scroll::-webkit-scrollbar-button:vertical:end:decrement,
+        .project-modal-scroll::-webkit-scrollbar-button:double-button {
+            display: none !important;
+            width: 0 !important;
+            height: 0 !important;
+        }
+
+        /* Top Outer Arrow Only (▲) */
+        .project-modal-scroll::-webkit-scrollbar-button:single-button:vertical:decrement,
+        .project-modal-scroll::-webkit-scrollbar-button:start:decrement {
+            display: block !important;
+            height: 16px;
+            width: 12px;
+            background-color: transparent;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 8px 8px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2364748b'%3E%3Cpath d='M12 6l-7 7h14z'/%3E%3C/svg%3E");
             border-radius: 3px;
+            cursor: pointer;
         }
-        .project-modal-content::-webkit-scrollbar-thumb:hover {
-            background: #94a3b8;
+        .project-modal-scroll::-webkit-scrollbar-button:single-button:vertical:decrement:hover,
+        .project-modal-scroll::-webkit-scrollbar-button:start:decrement:hover {
+            background-color: #f1f5f9;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230284c7'%3E%3Cpath d='M12 6l-7 7h14z'/%3E%3C/svg%3E");
+        }
+
+        /* Bottom Outer Arrow Only (▼) */
+        .project-modal-scroll::-webkit-scrollbar-button:single-button:vertical:increment,
+        .project-modal-scroll::-webkit-scrollbar-button:end:increment {
+            display: block !important;
+            height: 16px;
+            width: 12px;
+            background-color: transparent;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 8px 8px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2364748b'%3E%3Cpath d='M12 18l7-7H5z'/%3E%3C/svg%3E");
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .project-modal-scroll::-webkit-scrollbar-button:single-button:vertical:increment:hover,
+        .project-modal-scroll::-webkit-scrollbar-button:end:increment:hover {
+            background-color: #f1f5f9;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230284c7'%3E%3Cpath d='M12 18l7-7H5z'/%3E%3C/svg%3E");
+        }
+        .project-modal-scroll::-webkit-scrollbar-track {
+            background: transparent;
+            margin: 4px 0;
+        }
+        .project-modal-scroll::-webkit-scrollbar-thumb {
+            background-color: #cbd5e1;
+            border-radius: 9999px;
+            border: 2px solid transparent;
+            background-clip: padding-box;
+        }
+        .project-modal-scroll::-webkit-scrollbar-thumb:hover {
+            background-color: #94a3b8;
+        }
+        .project-modal-scroll::-webkit-scrollbar-corner {
+            display: none !important;
+            background: transparent !important;
         }
 
         /* Active Nav Link Marker */
@@ -441,7 +526,7 @@
         <div class="z-10 w-full max-w-5xl relative">
             <!-- Decorative HUD Telemetry -->
             <div class="absolute top-0 right-0 font-mono text-xs text-slate-500 hidden md:block text-right">
-                SYS.READY // RESUME_V1 <br>
+                SYS.READY // v2.4 <br>
                 INTERNSHIP: SEEKING_1YR <br>
                 <span class="text-cloud-500 animate-pulse font-bold">● ONLINE</span>
             </div>
@@ -520,7 +605,7 @@
                             
                             <!-- Badges -->
                             <div class="absolute top-3 left-3 bg-white/90 backdrop-blur text-cloud-600 font-mono text-[10px] px-2 py-0.5 rounded border border-cloud-200 shadow-sm z-10 font-bold">
-                                RESUME_V1 // SYNCED
+                                STATUS: OPTIMAL
                             </div>
                             <div class="absolute bottom-3 right-3 bg-white/90 backdrop-blur text-cloud-600 font-mono text-[10px] px-2.5 py-1 rounded border border-cloud-200 shadow-sm z-10 font-bold">
                                 LVL 20
@@ -666,14 +751,14 @@
             <div class="mb-16 reveal flex flex-col md:flex-row md:items-end justify-between gap-4">
                 <div>
                     <h3 class="font-mono text-cloud-500 font-bold uppercase tracking-widest mb-2 flex items-center gap-2">
-                        <i class="fa-solid fa-bolt"></i> 02. Capabilities
+                        <i class="fa-solid fa-bolt"></i> 02. Skill Tree
                     </h3>
-                    <h2 class="font-display text-4xl md:text-5xl font-bold text-slate-800 uppercase">Skill Tree</h2>
+                    <h2 class="font-display text-4xl md:text-5xl font-bold text-slate-800 uppercase">Capabilities</h2>
                     <div class="w-24 h-1 bg-gradient-to-r from-cloud-400 to-cloud-200 mt-4 rounded-full"></div>
                 </div>
                 <div class="flex items-center gap-3">
                     <div class="font-mono text-xs font-bold text-cloud-600 bg-white/70 backdrop-blur px-4 py-2 border border-white rounded shadow-sm">
-                        PROFICIENCY: <span class="text-slate-800">RESUME_V1 VERIFIED</span>
+                        EXP: <span class="text-slate-800">14,092</span> / 15,000
                     </div>
                     <div class="font-mono text-xs font-bold text-slate-600 bg-white/70 backdrop-blur px-3 py-2 border border-white rounded shadow-sm">
                         RANK: <span class="text-cloud-600">S-TIER</span>
@@ -855,13 +940,13 @@
             <div class="mb-16 reveal flex flex-col md:flex-row md:items-end justify-between gap-4">
                 <div>
                     <h3 class="font-mono text-cloud-500 font-bold uppercase tracking-widest mb-2 flex items-center gap-2">
-                        <i class="fa-solid fa-folder-open"></i> 03. Archive
+                        <i class="fa-solid fa-folder-open"></i> 03. Quests
                     </h3>
                     <h2 class="font-display text-4xl md:text-5xl font-bold text-slate-800 uppercase">Mission Logs</h2>
                     <div class="w-24 h-1 bg-gradient-to-r from-cloud-400 to-cloud-200 mt-4 rounded-full"></div>
                 </div>
                 <p class="font-mono text-xs font-bold text-slate-500 bg-white/70 backdrop-blur px-4 py-2 border border-white rounded shadow-sm">
-                    FEATURED_PROJECTS // [RESUME_V1]
+                    FEATURED_PROJECTS // [3_ACTIVE]
                 </p>
             </div>
 
@@ -869,7 +954,7 @@
                 <!-- Project Card 1: NotifyLeave -->
                 <div class="group relative reveal flex flex-col" onclick="openModal('notifyleave-modal')">
                     <!-- Targeting UI Hover Reticle -->
-                    <div class="target-reticle">
+                    <div class="target-reticle transition-all duration-500 group-hover:-translate-y-2">
                         <div class="bracket-tl"></div>
                         <div class="bracket-tr"></div>
                         <div class="bracket-bl"></div>
@@ -925,7 +1010,7 @@
                 <!-- Project Card 2: Bridgify -->
                 <div class="group relative reveal flex flex-col" style="transition-delay: 150ms;" onclick="openModal('bridgify-modal')">
                     <!-- Targeting UI Hover Reticle -->
-                    <div class="target-reticle">
+                    <div class="target-reticle transition-all duration-500 group-hover:-translate-y-2">
                         <div class="bracket-tl"></div>
                         <div class="bracket-tr"></div>
                         <div class="bracket-bl"></div>
@@ -983,7 +1068,7 @@
                 <!-- Project Card 3: Photography Club -->
                 <div class="group relative reveal flex flex-col" style="transition-delay: 300ms;" onclick="openModal('photography-modal')">
                     <!-- Targeting UI Hover Reticle -->
-                    <div class="target-reticle">
+                    <div class="target-reticle transition-all duration-500 group-hover:-translate-y-2">
                         <div class="bracket-tl"></div>
                         <div class="bracket-tr"></div>
                         <div class="bracket-bl"></div>
@@ -1029,7 +1114,7 @@
                             </p>
                             
                             <div class="pt-3 border-t border-white/60 flex items-center justify-between text-xs font-mono font-bold text-cloud-600">
-                                <span>[ STATUS: VERIFIED ]</span>
+                                <span>[ STATUS: DEPLOYED ]</span>
                                 <span class="group-hover:translate-x-1 transition-transform flex items-center gap-1">Details <i class="fa-solid fa-arrow-right text-[10px]"></i></span>
                             </div>
                         </div>
@@ -1209,8 +1294,9 @@
     <!-- ===================== NOTIFYLEAVE DETAIL MODAL ===================== -->
     <div id="notifyleave-modal" class="project-modal" role="dialog" aria-modal="true" aria-labelledby="notifyleave-title">
         <div class="project-modal-overlay" onclick="closeModal('notifyleave-modal')"></div>
-        <div class="project-modal-content p-6 md:p-8">
-            <div class="flex items-start justify-between border-b border-slate-200/80 pb-4 mb-6">
+        <div class="project-modal-content">
+            <div class="project-modal-scroll">
+                <div class="flex items-start justify-between border-b border-slate-200/80 pb-4 mb-6">
                 <div>
                     <div class="flex items-center gap-2 mb-1">
                         <span class="font-mono text-xs font-bold text-cloud-600 uppercase tracking-widest">// MISSION_01</span>
@@ -1247,7 +1333,7 @@
 
                 <div class="glass-panel-dark p-5 rounded-xl border border-white">
                     <h3 class="font-display font-bold text-slate-800 uppercase text-base mb-3 flex items-center gap-2">
-                        <i class="fa-solid fa-gear text-cloud-500"></i> Core Engineering Features (Resume Verified)
+                        <i class="fa-solid fa-gear text-cloud-500"></i> Core Engineering Features
                     </h3>
                     <ul class="space-y-3 text-slate-600 text-sm font-sans">
                         <li class="flex items-start gap-2.5">
@@ -1269,14 +1355,16 @@
                     </ul>
                 </div>
             </div>
+            </div>
         </div>
     </div>
 
     <!-- ===================== BRIDGIFY DETAIL MODAL ===================== -->
     <div id="bridgify-modal" class="project-modal" role="dialog" aria-modal="true" aria-labelledby="bridgify-title">
         <div class="project-modal-overlay" onclick="closeModal('bridgify-modal')"></div>
-        <div class="project-modal-content p-6 md:p-8">
-            <div class="flex items-start justify-between border-b border-slate-200/80 pb-4 mb-6">
+        <div class="project-modal-content">
+            <div class="project-modal-scroll">
+                <div class="flex items-start justify-between border-b border-slate-200/80 pb-4 mb-6">
                 <div>
                     <div class="flex items-center gap-2 mb-1">
                         <span class="font-mono text-xs font-bold text-cloud-600 uppercase tracking-widest">// MISSION_02</span>
@@ -1313,7 +1401,7 @@
 
                 <div class="glass-panel-dark p-5 rounded-xl border border-white">
                     <h3 class="font-display font-bold text-slate-800 uppercase text-base mb-3 flex items-center gap-2">
-                        <i class="fa-solid fa-gear text-cloud-500"></i> Core Engineering Features (Resume Verified)
+                        <i class="fa-solid fa-gear text-cloud-500"></i> Core Engineering Features
                     </h3>
                     <ul class="space-y-3 text-slate-600 text-sm font-sans">
                         <li class="flex items-start gap-2.5">
@@ -1335,14 +1423,16 @@
                     </ul>
                 </div>
             </div>
+            </div>
         </div>
     </div>
 
     <!-- ===================== PHOTOGRAPHY CLUB DETAIL MODAL ===================== -->
     <div id="photography-modal" class="project-modal" role="dialog" aria-modal="true" aria-labelledby="photography-title">
         <div class="project-modal-overlay" onclick="closeModal('photography-modal')"></div>
-        <div class="project-modal-content p-6 md:p-8">
-            <div class="flex items-start justify-between border-b border-slate-200/80 pb-4 mb-6">
+        <div class="project-modal-content">
+            <div class="project-modal-scroll">
+                <div class="flex items-start justify-between border-b border-slate-200/80 pb-4 mb-6">
                 <div>
                     <div class="flex items-center gap-2 mb-1">
                         <span class="font-mono text-xs font-bold text-cloud-600 uppercase tracking-widest">// MISSION_03</span>
@@ -1378,7 +1468,7 @@
 
                 <div class="glass-panel-dark p-5 rounded-xl border border-white">
                     <h3 class="font-display font-bold text-slate-800 uppercase text-base mb-3 flex items-center gap-2">
-                        <i class="fa-solid fa-gear text-cloud-500"></i> Core Engineering Features (Resume Verified)
+                        <i class="fa-solid fa-gear text-cloud-500"></i> Core Technical Features
                     </h3>
                     <ul class="space-y-3 text-slate-600 text-sm font-sans">
                         <li class="flex items-start gap-2.5">
@@ -1399,6 +1489,7 @@
                         </li>
                     </ul>
                 </div>
+            </div>
             </div>
         </div>
     </div>
