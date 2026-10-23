@@ -1,745 +1,1626 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Rainie | Developer Portfolio</title>
-    <meta name="description"
-        content="Rainie's digital portfolio — an aspiring AI Solutions Architect specializing in bridging the gap between data insights and functional software." />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet" />
-    <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rainie.SYS | Applied AI & Analytics Portfolio</title>
+    <meta name="description" content="Tan Wen Jing Rainie — Applied AI & Analytics student at Nanyang Polytechnic. Proficient in Python, JavaScript, React, Snowflake, KNIME, and Software Testing. Seeking a 1-year internship.">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['"Space Grotesk"', 'sans-serif'],
+                        mono: ['"Share Tech Mono"', 'monospace'],
+                    },
+                    colors: {
+                        cloud: {
+                            50: '#f8fafc',
+                            100: '#f0f9ff',
+                            200: '#e0f2fe',
+                            300: '#bae6fd',
+                            400: '#7dd3fc',
+                            500: '#38bdf8',
+                            600: '#0284c7',
+                        },
+                        hud: {
+                            base: '#94a3b8',
+                            dark: '#334155',
+                            text: '#475569'
+                        }
+                    },
+                    animation: {
+                        'blob': 'blob 10s infinite',
+                        'blob-slow': 'blob 15s infinite reverse',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%, 100%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Base & Background */
+        body {
+            background-color: #f0f9ff;
+            color: #334155;
+            overflow-x: hidden;
+            cursor: crosshair;
+        }
+
+        /* Tactical Dot Grid Overlay - Softer for light theme */
+        .bg-grid {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background-image: radial-gradient(#94a3b8 1px, transparent 1px);
+            background-size: 40px 40px;
+            opacity: 0.22;
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        /* Ambient Glows */
+        .ambient-glow {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: -3;
+            opacity: 0.6;
+        }
+
+        /* Advanced Cloud System - Continuous Left-to-Right Drift */
+        .cloud-system {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: -1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        /* Procedural CSS Clouds - Enhanced Visibility & Fluffy Shapes */
+        .css-cloud {
+            position: absolute;
+            background: #ffffff;
+            border-radius: 100px;
+            filter: blur(2px);
+            box-shadow: 0 16px 40px rgba(56, 189, 248, 0.32), 0 4px 16px rgba(14, 165, 233, 0.18), inset 0 -6px 14px rgba(186, 230, 253, 0.65);
+            border: 1px solid rgba(255, 255, 255, 0.95);
+            animation: driftLeftToRight linear infinite;
+            will-change: transform;
+            opacity: 0.95;
+        }
+
+        .css-cloud::before, .css-cloud::after, .css-cloud .cloud-puff {
+            content: '';
+            position: absolute;
+            background: #ffffff;
+            border-radius: 50%;
+        }
+
+        .c1 { width: 340px; height: 105px; }
+        .c1::before { width: 155px; height: 155px; top: -75px; left: 45px; }
+        .c1::after { width: 125px; height: 125px; top: -55px; right: 45px; }
+        .c1 .cloud-puff { width: 140px; height: 140px; top: -65px; left: 140px; }
+
+        .c2 { width: 440px; height: 130px; opacity: 0.88; }
+        .c2::before { width: 190px; height: 190px; top: -95px; left: 60px; }
+        .c2::after { width: 160px; height: 160px; top: -75px; right: 60px; }
+        .c2 .cloud-puff { width: 175px; height: 175px; top: -85px; left: 190px; }
+
+        .c3 { width: 250px; height: 80px; }
+        .c3::before { width: 115px; height: 115px; top: -55px; left: 35px; }
+        .c3::after { width: 95px; height: 95px; top: -42px; right: 35px; }
+        .c3 .cloud-puff { width: 105px; height: 105px; top: -50px; left: 105px; }
+
+        @keyframes driftLeftToRight {
+            0% {
+                transform: translate3d(-500px, 0, 0);
+            }
+            50% {
+                transform: translate3d(calc(50vw - 250px), -12px, 0);
+            }
+            100% {
+                transform: translate3d(calc(100vw + 500px), 0, 0);
+            }
+        }
+
+        /* Ethereal Glassmorphism Panels */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.55);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.85);
+            box-shadow: 0 15px 35px rgba(125, 211, 252, 0.15), inset 0 0 20px rgba(255, 255, 255, 0.6);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .glass-panel:hover {
+            box-shadow: 0 20px 45px rgba(125, 211, 252, 0.28), inset 0 0 20px rgba(255, 255, 255, 0.8);
+        }
+        
+        .glass-panel-dark {
+            background: rgba(241, 245, 249, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.95);
+        }
+
+        /* Sci-Fi HUD Borders - Light Blue Accents */
+        .hud-border {
+            position: relative;
+        }
+        .hud-border::before, .hud-border::after {
+            content: '';
+            position: absolute;
+            width: 20px; height: 20px;
+            border: 2px solid #38bdf8;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+        }
+        .hud-border::before { top: -2px; left: -2px; border-right: none; border-bottom: none; }
+        .hud-border::after { bottom: -2px; right: -2px; border-left: none; border-top: none; }
+        
+        .hud-border:hover::before, .hud-border:hover::after {
+            width: calc(100% + 4px); height: calc(100% + 4px);
+            opacity: 0.35;
+            border-color: #7dd3fc;
+        }
+
+        /* Glitch Text Effect */
+        .glitch-text {
+            position: relative;
+            display: inline-block;
+        }
+        .glitch-text::before, .glitch-text::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            opacity: 0.8;
+        }
+        .glitch-text::before {
+            left: 2px;
+            text-shadow: -1px 0 #7dd3fc;
+            clip: rect(24px, 550px, 90px, 0);
+            animation: glitch-anim 3s infinite linear alternate-reverse;
+        }
+        .glitch-text::after {
+            left: -2px;
+            text-shadow: -1px 0 #cbd5e1;
+            clip: rect(85px, 550px, 140px, 0);
+            animation: glitch-anim 2.5s infinite linear alternate-reverse;
+        }
+        @keyframes glitch-anim {
+            0% { clip: rect(10px, 9999px, 31px, 0); transform: translate(0); }
+            20% { clip: rect(65px, 9999px, 12px, 0); transform: translate(-1px, 1px); }
+            40% { clip: rect(43px, 9999px, 85px, 0); transform: translate(1px, -1px); }
+            60% { clip: rect(12px, 9999px, 90px, 0); transform: translate(-1px, 0); }
+            80% { clip: rect(85px, 9999px, 33px, 0); transform: translate(1px, 1px); }
+            100% { clip: rect(20px, 9999px, 75px, 0); transform: translate(0); }
+        }
+
+        /* RPG Skill Bars - Ethereal Blue */
+        .skill-track {
+            display: flex;
+            gap: 4px;
+            height: 14px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.4);
+            padding: 2px;
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            border-radius: 2px;
+        }
+        .skill-segment {
+            flex: 1;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.85);
+            border-radius: 1px;
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transform: scaleY(0.1);
+            opacity: 0;
+        }
+        .skill-segment.filled {
+            background: #38bdf8;
+            border-color: #bae6fd;
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.6);
+            transform: scaleY(1);
+            opacity: 1;
+        }
+
+        /* Floating Animation */
+        .animate-float { animation: float 6s ease-in-out infinite; }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Scroll Reveal Utility */
+        .reveal {
+            opacity: 0;
+            transform: translateY(35px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Typewriter Cursor */
+        .cursor-blink { animation: blink 1s step-end infinite; color: #38bdf8; }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        /* Custom Selection */
+        ::selection { background: #bae6fd; color: #0f172a; }
+
+        /* Targeting UI Reticles on Project Cards */
+        .target-reticle {
+            position: absolute;
+            inset: 0;
+            border: 1px solid #7dd3fc;
+            opacity: 0;
+            transform: scale(0.97);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: none;
+            z-index: 20;
+            border-radius: 1rem;
+        }
+        .group:hover .target-reticle {
+            opacity: 1;
+            transform: scale(1);
+        }
+        .target-reticle .bracket-tl {
+            position: absolute; top: -2px; left: -2px; width: 22px; height: 22px;
+            border-top: 2px solid #0284c7; border-left: 2px solid #0284c7; border-top-left-radius: 6px;
+        }
+        .target-reticle .bracket-tr {
+            position: absolute; top: -2px; right: -2px; width: 22px; height: 22px;
+            border-top: 2px solid #0284c7; border-right: 2px solid #0284c7; border-top-right-radius: 6px;
+        }
+        .target-reticle .bracket-bl {
+            position: absolute; bottom: -2px; left: -2px; width: 22px; height: 22px;
+            border-bottom: 2px solid #0284c7; border-left: 2px solid #0284c7; border-bottom-left-radius: 6px;
+        }
+        .target-reticle .bracket-br {
+            position: absolute; bottom: -2px; right: -2px; width: 22px; height: 22px;
+            border-bottom: 2px solid #0284c7; border-right: 2px solid #0284c7; border-bottom-right-radius: 6px;
+        }
+
+        /* Ethereal Modal Styles */
+        .project-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            padding: 1.25rem;
+        }
+        .project-modal.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .project-modal-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.45);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        .project-modal-content {
+            position: relative;
+            z-index: 10;
+            max-width: 54rem;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            background: rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.95);
+            box-shadow: 0 25px 60px rgba(56, 189, 248, 0.25), inset 0 0 20px rgba(255, 255, 255, 0.8);
+            border-radius: 1.25rem;
+            transform: scale(0.96) translateY(20px);
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .project-modal.active .project-modal-content {
+            transform: scale(1) translateY(0);
+        }
+
+        /* Custom scrollbar for modals */
+        .project-modal-content::-webkit-scrollbar {
+            width: 6px;
+        }
+        .project-modal-content::-webkit-scrollbar-track {
+            background: rgba(241, 245, 249, 0.5);
+        }
+        .project-modal-content::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+        .project-modal-content::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        /* Active Nav Link Marker */
+        .nav-link.active {
+            color: #0284c7;
+            font-weight: 700;
+        }
+        .nav-link.active::after {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 2px;
+            background: #38bdf8;
+            border-radius: 1px;
+            margin-top: 2px;
+        }
+    </style>
 </head>
+<body class="antialiased bg-gradient-to-br from-cloud-100 via-cloud-200 to-slate-100 min-h-screen">
 
-<body>
+    <!-- Atmospheric Ambient Glows -->
+    <div class="ambient-glow bg-cloud-300 w-96 h-96 top-[-10%] left-[-10%] animate-blob"></div>
+    <div class="ambient-glow bg-white w-[30rem] h-[30rem] top-[40%] right-[-5%] animate-blob-slow"></div>
+    <div class="ambient-glow bg-cloud-400/40 w-80 h-80 bottom-[-10%] left-[20%] animate-blob" style="animation-delay: 2s;"></div>
 
-    <!-- CRT / Scanline Overlay -->
-    <div class="crt-overlay"></div>
-    <div class="scanline"></div>
+    <!-- Tactical Dot Grid Overlay -->
+    <div class="bg-grid"></div>
+    
+    <!-- Procedural Cloud System (Continuous Left-to-Right Drift) -->
+    <div class="cloud-system">
+        <div class="css-cloud c1" style="top: 6%; animation-duration: 65s; animation-delay: -18s;"><div class="cloud-puff"></div></div>
+        <div class="css-cloud c3" style="top: 19%; animation-duration: 48s; animation-delay: -35s;"><div class="cloud-puff"></div></div>
+        <div class="css-cloud c2" style="top: 34%; animation-duration: 80s; animation-delay: -10s;"><div class="cloud-puff"></div></div>
+        <div class="css-cloud c3" style="top: 49%; animation-duration: 52s; animation-delay: -42s;"><div class="cloud-puff"></div></div>
+        <div class="css-cloud c1" style="top: 63%; animation-duration: 70s; animation-delay: -24s;"><div class="cloud-puff"></div></div>
+        <div class="css-cloud c2" style="top: 76%; animation-duration: 88s; animation-delay: -60s;"><div class="cloud-puff"></div></div>
+        <div class="css-cloud c3" style="top: 88%; animation-duration: 45s; animation-delay: -8s;"><div class="cloud-puff"></div></div>
+    </div>
 
-    <!-- Matrix Rain Canvas -->
-    <canvas id="matrix-canvas"></canvas>
-
-    <!-- ===================== NAVBAR ===================== -->
-    <nav id="navbar" class="navbar">
-        <div class="nav-container">
-            <a href="#hero" class="nav-logo">
-                <span class="logo-bracket">&lt;</span><span class="logo-name">Rainie</span><span class="logo-bracket">
-                    /&gt;</span>
+    <!-- Navigation Bar -->
+    <nav id="navbar" class="fixed w-full z-50 bg-white/40 backdrop-blur-md border-b border-white/60 text-slate-800 p-4 transition-all duration-300 hover:bg-white/60">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="#hero" class="font-display font-bold text-xl tracking-widest uppercase flex items-center gap-2 text-slate-800 hover:text-cloud-600 transition-colors">
+                <i class="fa-solid fa-microchip text-cloud-500"></i> Rainie.SYS
             </a>
-            <button id="nav-toggle" class="nav-toggle" aria-label="Toggle navigation">
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
+
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex items-center gap-7 font-mono text-xs font-bold tracking-widest">
+                <a href="#profile" class="nav-link hover:text-cloud-600 transition-colors uppercase py-1" data-section="profile">[ 01_Identity ]</a>
+                <a href="#skills" class="nav-link hover:text-cloud-600 transition-colors uppercase py-1" data-section="skills">[ 02_Skill_Tree ]</a>
+                <a href="#quests" class="nav-link hover:text-cloud-600 transition-colors uppercase py-1" data-section="quests">[ 03_Quests ]</a>
+                <a href="#contact" class="nav-link hover:text-cloud-600 transition-colors uppercase py-1" data-section="contact">[ 04_Transmission ]</a>
+                <a href="documents/TanWenJingRainie_Resume_V1.pdf" download="TanWenJingRainie_Resume_V1.pdf" class="bg-slate-800 hover:bg-cloud-500 text-white px-3.5 py-1.5 rounded text-[11px] uppercase tracking-wider transition-all duration-300 shadow-sm flex items-center gap-1.5" title="Download TanWenJingRainie_Resume_V1.pdf">
+                    <i class="fa-solid fa-file-arrow-down text-xs"></i> Resume_V1.pdf
+                </a>
+            </div>
+
+            <!-- Mobile Hamburger Toggle -->
+            <button id="nav-toggle" class="md:hidden text-slate-700 hover:text-cloud-500 focus:outline-none p-2" aria-label="Toggle Navigation">
+                <i id="nav-icon" class="fa-solid fa-bars text-xl"></i>
             </button>
-            <ul id="nav-menu" class="nav-menu">
-                <li><a href="#about" class="nav-link" data-section="about"><span class="nav-comment">// </span>about</a>
-                </li>
-                <li><a href="#skills" class="nav-link" data-section="skills"><span class="nav-comment">//
-                        </span>skills</a></li>
-                <li><a href="#projects" class="nav-link" data-section="projects"><span class="nav-comment">//
-                        </span>projects</a></li>
-                <li><a href="#contact" class="nav-link" data-section="contact"><span class="nav-comment">//
-                        </span>contact</a></li>
-            </ul>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden px-4 pt-4 pb-6 mt-2 bg-white/80 backdrop-blur-xl border-t border-white/80 rounded-b-2xl shadow-lg font-mono text-xs uppercase font-bold tracking-widest space-y-3">
+            <a href="#profile" class="block py-2 text-slate-700 hover:text-cloud-500 border-b border-slate-100">[ 01_Identity ]</a>
+            <a href="#skills" class="block py-2 text-slate-700 hover:text-cloud-500 border-b border-slate-100">[ 02_Skill_Tree ]</a>
+            <a href="#quests" class="block py-2 text-slate-700 hover:text-cloud-500 border-b border-slate-100">[ 03_Quests ]</a>
+            <a href="#contact" class="block py-2 text-slate-700 hover:text-cloud-500 border-b border-slate-100">[ 04_Transmission ]</a>
+            <a href="documents/TanWenJingRainie_Resume_V1.pdf" download="TanWenJingRainie_Resume_V1.pdf" class="inline-flex items-center gap-2 mt-2 bg-slate-800 text-white px-4 py-2 rounded text-xs uppercase tracking-wider hover:bg-cloud-500 transition-colors">
+                <i class="fa-solid fa-file-arrow-down"></i> Download Resume (V1)
+            </a>
         </div>
     </nav>
 
-    <!-- ===================== HERO ===================== -->
-    <section id="hero" class="hero-section">
-        <div class="hero-content">
-            <div class="terminal-window">
-                <div class="terminal-header">
-                    <div class="terminal-dots">
-                        <span class="dot red"></span>
-                        <span class="dot yellow"></span>
-                        <span class="dot green"></span>
-                    </div>
-                    <span class="terminal-title">rainie@portfolio:~</span>
-                </div>
-                <div class="terminal-body">
-                    <div class="terminal-line">
-                        <span class="prompt">$</span>
-                        <span class="command">cat intro.txt</span>
-                    </div>
-                    <div class="terminal-output">
-                        <p class="hero-greeting">Hello, World! I'm</p>
-                        <h1 class="hero-name glitch" data-text="Rainie">Rainie</h1>
-                        <p class="hero-tagline" id="typed-tagline"></p>
-                        <span class="cursor-blink">|</span>
-                    </div>
-                    <div class="terminal-line delayed">
-                        <span class="prompt">$</span>
-                        <span class="command">echo $PASSION</span>
-                    </div>
-                    <p class="terminal-result delayed-more">"Building beautiful digital experiences with code ✨"</p>
-                </div>
+    <!-- Hero Section -->
+    <section id="hero" class="min-h-screen flex items-center justify-center relative pt-24 pb-16 px-6">
+        <div class="z-10 w-full max-w-5xl relative">
+            <!-- Decorative HUD Telemetry -->
+            <div class="absolute top-0 right-0 font-mono text-xs text-slate-500 hidden md:block text-right">
+                SYS.READY // RESUME_V1 <br>
+                INTERNSHIP: SEEKING_1YR <br>
+                <span class="text-cloud-500 animate-pulse font-bold">● ONLINE</span>
             </div>
-            <div class="hero-cta delayed-most">
-                <a href="#projects" class="btn btn-primary">
-                    <span class="btn-icon">&#9654;</span> View My Work
-                </a>
-                <a href="#contact" class="btn btn-outline">
-                    <span class="btn-icon">&#9993;</span> Get In Touch
-                </a>
-            </div>
-        </div>
-        <div class="scroll-indicator">
-            <div class="scroll-arrow"></div>
-            <span>scroll down</span>
-        </div>
-    </section>
-
-    <!-- ===================== ABOUT ===================== -->
-    <section id="about" class="section about-section">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">&lt;section id="about"&gt;</span>
-                <h2 class="section-title">About Me</h2>
-            </div>
-            <div class="about-grid">
-                <div class="about-image-wrapper reveal-left">
-                    <div class="code-frame">
-                        <div class="code-frame-header">
-                            <span class="dot red"></span>
-                            <span class="dot yellow"></span>
-                            <span class="dot green"></span>
-                            <span class="code-filename">rainie.png</span>
-                        </div>
-                        <div class="about-image-container">
-                            <div class="about-image about-avatar-placeholder" id="about-avatar">
-                                <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <rect width="400" height="400" fill="#1e293b" />
-                                    <circle cx="200" cy="160" r="60" fill="#334155" stroke="#818cf8" stroke-width="2" />
-                                    <path d="M120 320 Q120 240 200 240 Q280 240 280 320" fill="#334155" stroke="#818cf8"
-                                        stroke-width="2" />
-                                    <text x="200" y="360" text-anchor="middle" fill="#818cf8" font-family="monospace"
-                                        font-size="16">&lt;Rainie /&gt;</text>
-                                    <circle cx="185" cy="150" r="5" fill="#67e8f9" />
-                                    <circle cx="215" cy="150" r="5" fill="#67e8f9" />
-                                    <path d="M185 172 Q200 185 215 172" stroke="#67e8f9" stroke-width="2" fill="none" />
-                                    <!-- Floating code particles -->
-                                    <text x="60" y="80" fill="#818cf8" font-family="monospace" font-size="10"
-                                        opacity="0.3">01001</text>
-                                    <text x="300" y="100" fill="#c084fc" font-family="monospace" font-size="10"
-                                        opacity="0.3">{code}</text>
-                                    <text x="80" y="300" fill="#67e8f9" font-family="monospace" font-size="10"
-                                        opacity="0.3">&lt;/&gt;</text>
-                                    <text x="310" y="280" fill="#818cf8" font-family="monospace" font-size="10"
-                                        opacity="0.3">fn()</text>
-                                </svg>
-                            </div>
-                            <div class="image-overlay"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="about-text reveal-right">
-                    <div class="code-comment">// who am I?</div>
-                    <p>
-                        I am an aspiring Student nearing completion of my Diploma in AI
-                        and Analytics at
-                        <strong>Nanyang Polytechnic</strong>. I specialize in bridging the gap between complex data
-                        insights and functional
-                        software solutions. My technical foundation includes proficiency in <strong>Python</strong>,
-                        <strong>SQL</strong>,
-                        and <strong>web development (HTML/CSS)</strong>, along with a solid background in <strong>IT
-                            Systems and Networks</strong>.
+            
+            <div class="animate-float flex flex-col items-start w-full">
+                <!-- User Status Capsule -->
+                <div class="glass-panel px-4 py-2 rounded-full mb-4 border-white flex items-center whitespace-nowrap shadow-sm">
+                    <p class="font-mono text-slate-600 text-xs md:text-sm tracking-widest uppercase font-bold m-0">
+                        <i class="fa-solid fa-terminal text-cloud-500 mr-2"></i> User: 
+                        <span id="typewriter" class="text-slate-900"></span><span class="cursor-blink">_</span>
                     </p>
-                    <p>
-                        During my industry experience as an <strong>IT Software Tester</strong>, I honed a meticulous
-                        approach to system
-                        stability and quality assurance. I am a disciplined and high-achieving student, consistently
-                        recognized on the
-                        <strong>Director’s List</strong> and awarded multiple <strong>Edusave honors</strong> for
-                        academic excellence and character.
-                    </p>
-                    <div class="about-stats">
-                        <div class="stat-card glass-card">
-                            <span class="stat-number" data-target="3">0</span><span class="stat-suffix"></span>
-                            <span class="stat-label">Projects</span>
-                        </div>
-                        <div class="stat-card glass-card">
-                            <span class="stat-number" data-target="5">0</span><span class="stat-suffix">+</span>
-                            <span class="stat-label">Technologies</span>
-                        </div>
-                        <div class="stat-card glass-card">
-                            <span class="stat-number" data-target="1000">0</span><span class="stat-suffix">+</span>
-                            <span class="stat-label">Lines of Code</span>
-                        </div>
-                    </div>
+                </div>
+
+                <h1 class="font-display font-bold text-6xl md:text-8xl lg:text-9xl text-slate-800 leading-none tracking-wide md:tracking-wider uppercase mb-2 glitch-text drop-shadow-sm w-full text-left" data-text="RAINIE">
+                    RAINIE
+                </h1>
+                
+                <h2 class="font-display text-2xl md:text-4xl text-slate-600 font-bold uppercase tracking-widest mb-4 w-full text-left">
+                    Applied AI &amp; Analytics <span class="text-cloud-500 font-light">Student</span>
+                </h2>
+
+                <p class="font-sans text-slate-600 text-base md:text-lg max-w-2xl mb-8 leading-relaxed">
+                    Detail-oriented Applied AI &amp; Analytics student at Nanyang Polytechnic with hands-on experience in software testing, full-stack web development, and data analytics. <strong class="text-slate-800 font-semibold">Seeking a 1-year internship</strong> to apply analytical, programming, and problem-solving skills.
+                </p>
+                
+                <div class="flex flex-wrap gap-4 items-center">
+                    <a href="#quests" class="relative inline-flex items-center justify-center px-8 py-4 overflow-hidden font-mono font-bold tracking-widest text-white bg-slate-800 rounded-sm group hover:bg-cloud-500 transition-all duration-300 shadow-[0_10px_20px_rgba(56,189,248,0.2)] hover:shadow-[0_10px_30px_rgba(56,189,248,0.4)]">
+                        <span class="absolute w-0 h-0 transition-all duration-500 ease-out bg-white rounded-full group-hover:w-56 group-hover:h-56 opacity-10"></span>
+                        <span class="relative flex items-center gap-2">
+                            <i class="fa-solid fa-play text-xs"></i> INIT_QUESTS
+                        </span>
+                    </a>
+
+                    <a href="documents/TanWenJingRainie_Resume_V1.pdf" download="TanWenJingRainie_Resume_V1.pdf" class="glass-panel px-7 py-4 font-mono font-bold tracking-widest text-slate-800 rounded-sm hover:text-cloud-600 hover:border-cloud-300 transition-all duration-300 flex items-center gap-2 shadow-sm">
+                        <i class="fa-solid fa-file-arrow-down text-xs text-cloud-500"></i> GET_RESUME_V1
+                    </a>
+
+                    <a href="#contact" class="glass-panel px-7 py-4 font-mono font-bold tracking-widest text-slate-700 rounded-sm hover:text-cloud-600 hover:border-cloud-300 transition-all duration-300 flex items-center gap-2">
+                        <i class="fa-solid fa-satellite-dish text-xs text-cloud-500"></i> TRANSMIT_MSG
+                    </a>
                 </div>
             </div>
-            <span class="section-tag closing-tag">&lt;/section&gt;</span>
         </div>
     </section>
 
-    <!-- ===================== SKILLS ===================== -->
-    <section id="skills" class="section skills-section">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">&lt;section id="skills"&gt;</span>
-                <h2 class="section-title">Tech Stack</h2>
+    <!-- Player Profile Section (About & Resume Experience) -->
+    <section id="profile" class="py-28 px-6 relative z-10">
+        <div class="max-w-6xl mx-auto">
+            <div class="mb-16 reveal">
+                <h3 class="font-mono text-cloud-500 font-bold uppercase tracking-widest mb-2 flex items-center gap-2">
+                    <i class="fa-solid fa-id-card"></i> 01. Identity
+                </h3>
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-slate-800 uppercase">Player Profile</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-cloud-400 to-cloud-200 mt-4 rounded-full"></div>
             </div>
-            <div class="skills-grid">
 
-                <div class="skill-card glass-card reveal-up" data-tilt>
-                    <div class="skill-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M16 18l6-6-6-6M8 6l-6 6 6 6" />
-                        </svg>
+            <div class="grid md:grid-cols-12 gap-8 items-stretch reveal">
+                <!-- Avatar / Visual HUD -->
+                <div class="md:col-span-4 relative group flex">
+                    <div class="glass-panel p-4 hud-border w-full flex flex-col items-center justify-between relative overflow-hidden rounded-xl">
+                        <!-- Laser scanning line effect -->
+                        <div class="absolute top-0 left-0 w-full h-1 bg-cloud-300 shadow-[0_0_20px_rgba(186,230,253,1)] group-hover:animate-[ping_2.5s_infinite] opacity-0 group-hover:opacity-100 transition-opacity z-20"></div>
+                        
+                        <!-- Internal Avatar Frame -->
+                        <div class="w-full bg-gradient-to-br from-white to-cloud-100 rounded-lg relative flex flex-col items-center justify-center overflow-hidden border border-white shadow-inner p-6 min-h-[260px]">
+                            <div class="absolute inset-0 opacity-15 bg-[radial-gradient(#38bdf8_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                            
+                            <i class="fa-solid fa-user-astronaut text-8xl text-cloud-400 drop-shadow-md z-10 group-hover:scale-110 transition-transform duration-500"></i>
+                            
+                            <div class="mt-4 font-display text-sm uppercase tracking-widest text-slate-800 font-bold z-10 text-center">
+                                Tan Wen Jing Rainie
+                            </div>
+                            <div class="font-mono text-[11px] text-cloud-600 font-bold tracking-wider z-10 text-center mt-0.5">
+                                [ APPLIED AI &amp; ANALYTICS ]
+                            </div>
+                            
+                            <!-- Badges -->
+                            <div class="absolute top-3 left-3 bg-white/90 backdrop-blur text-cloud-600 font-mono text-[10px] px-2 py-0.5 rounded border border-cloud-200 shadow-sm z-10 font-bold">
+                                RESUME_V1 // SYNCED
+                            </div>
+                            <div class="absolute bottom-3 right-3 bg-white/90 backdrop-blur text-cloud-600 font-mono text-[10px] px-2.5 py-1 rounded border border-cloud-200 shadow-sm z-10 font-bold">
+                                LVL 20
+                            </div>
+                        </div>
+
+                        <!-- Quick Resume Info Pills -->
+                        <div class="w-full space-y-2 mt-4 text-xs font-mono">
+                            <div class="bg-white/70 p-2.5 rounded border border-white flex justify-between items-center">
+                                <span class="text-slate-500 font-bold"><i class="fa-solid fa-graduation-cap text-cloud-500 mr-1.5"></i> NYP AI &amp; Analytics</span>
+                                <span class="text-cloud-600 font-bold">2025 - PRES</span>
+                            </div>
+                            <div class="bg-white/70 p-2.5 rounded border border-white flex justify-between items-center">
+                                <span class="text-slate-500 font-bold"><i class="fa-solid fa-server text-cloud-500 mr-1.5"></i> ITE IT Sys &amp; Net</span>
+                                <span class="text-slate-700 font-bold">2023 - 2025</span>
+                            </div>
+                            <div class="bg-white/70 p-2.5 rounded border border-white flex justify-between items-center">
+                                <span class="text-slate-500 font-bold"><i class="fa-solid fa-language text-cloud-500 mr-1.5"></i> Languages</span>
+                                <span class="text-slate-700 font-bold">English, Chinese</span>
+                            </div>
+                        </div>
                     </div>
-                    <h3>HTML &amp; CSS</h3>
-                    <div class="skill-bar">
-                        <div class="skill-fill" data-level="90"></div>
-                    </div>
-                    <p>Semantic markup, responsive layouts, animations &amp; modern CSS features.</p>
                 </div>
 
-                <div class="skill-card glass-card reveal-up" data-tilt style="animation-delay: 0.1s">
-                    <div class="skill-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="2" y="3" width="20" height="14" rx="2" />
-                            <line x1="8" y1="21" x2="16" y2="21" />
-                            <line x1="12" y1="17" x2="12" y2="21" />
-                        </svg>
-                    </div>
-                    <h3>JavaScript</h3>
-                    <div class="skill-bar">
-                        <div class="skill-fill" data-level="85"></div>
-                    </div>
-                    <p>Interactive UIs, DOM manipulation, ES6+ features &amp; async programming.</p>
-                </div>
+                <!-- Bio & Achievements Content -->
+                <div class="md:col-span-8 glass-panel p-8 md:p-10 hud-border rounded-xl flex flex-col justify-between space-y-6">
+                    <div class="space-y-4">
+                        <p class="text-lg text-slate-700 font-sans leading-relaxed">
+                            <span class="font-bold text-2xl font-display text-slate-800">HELLO_WORLD.</span> I am Tan Wen Jing Rainie, a detail-oriented <span class="bg-cloud-100 text-cloud-600 font-bold px-2 py-0.5 rounded border border-cloud-200">Applied AI &amp; Analytics</span> student at <strong class="text-slate-800">Nanyang Polytechnic</strong> with hands-on experience in software testing, full-stack web development, and data analytics.
+                        </p>
+                        <p class="font-sans text-slate-600 leading-relaxed">
+                            Proficient in <strong class="text-slate-800">Python, JavaScript, Flask, React, Snowflake, and KNIME</strong>. Seeking a <strong class="text-slate-800 bg-amber-50 text-amber-800 px-2 py-0.5 rounded border border-amber-200">1-year internship</strong> to apply my analytical, programming, and problem-solving skills while gaining practical industry experience.
+                        </p>
 
-                <div class="skill-card glass-card reveal-up" data-tilt style="animation-delay: 0.2s">
-                    <div class="skill-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M12 2L2 7l10 5 10-5-10-5z" />
-                            <path d="M2 17l10 5 10-5" />
-                            <path d="M2 12l10 5 10-5" />
-                        </svg>
-                    </div>
-                    <h3>Python</h3>
-                    <div class="skill-bar">
-                        <div class="skill-fill" data-level="80"></div>
-                    </div>
-                    <p>Scripting, automation, Flask/Django web frameworks &amp; data processing.</p>
-                </div>
+                        <!-- Work Experience Card (BeyondSoft) -->
+                        <div class="glass-panel-dark p-5 rounded-lg border border-white/80 relative overflow-hidden">
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
+                                <h4 class="font-display text-slate-800 font-bold uppercase text-base flex items-center gap-2">
+                                    <i class="fa-solid fa-briefcase text-cloud-500"></i> IT Software Tester <span class="text-cloud-600 font-sans font-normal text-sm">| BeyondSoft</span>
+                                </h4>
+                                <span class="font-mono text-xs font-bold text-slate-500 bg-white/80 px-2 py-0.5 rounded border border-slate-200 self-start sm:self-auto">
+                                    April 2024 – August 2024
+                                </span>
+                            </div>
+                            <ul class="space-y-1.5 text-xs md:text-sm text-slate-600 font-sans">
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-solid fa-chevron-right text-cloud-400 mt-1 text-[10px]"></i>
+                                    <span>Conducted manual and automated software testing to identify bugs, ensure system stability, and safeguard product quality.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-solid fa-chevron-right text-cloud-400 mt-1 text-[10px]"></i>
+                                    <span>Documented detailed error logs and collaborated closely with software engineers to diagnose and resolve technical issues.</span>
+                                </li>
+                            </ul>
+                        </div>
 
-                <div class="skill-card glass-card reveal-up" data-tilt style="animation-delay: 0.3s">
-                    <div class="skill-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="3" />
-                            <path
-                                d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83" />
-                        </svg>
-                    </div>
-                    <h3>React</h3>
-                    <div class="skill-bar">
-                        <div class="skill-fill" data-level="75"></div>
-                    </div>
-                    <p>Component architecture, hooks, state management &amp; single-page apps.</p>
-                </div>
+                        <!-- Industry Certifications -->
+                        <div>
+                            <h4 class="font-mono text-xs font-bold uppercase tracking-wider text-cloud-600 mb-2 flex items-center gap-1.5">
+                                <i class="fa-solid fa-certificate"></i> Verified Certifications
+                            </h4>
+                            <div class="grid sm:grid-cols-3 gap-2.5">
+                                <div class="bg-white/70 p-3 rounded-lg border border-white shadow-sm">
+                                    <div class="font-display text-xs font-bold text-slate-800">AI for Industry</div>
+                                    <div class="font-sans text-[11px] text-slate-500">Literacy in AI (AI Singapore)</div>
+                                    <div class="font-mono text-[10px] text-cloud-600 font-bold mt-1">May 2026</div>
+                                </div>
+                                <div class="bg-white/70 p-3 rounded-lg border border-white shadow-sm">
+                                    <div class="font-display text-xs font-bold text-slate-800">SnowPro Associate</div>
+                                    <div class="font-sans text-[11px] text-slate-500">Platform (Snowflake)</div>
+                                    <div class="font-mono text-[10px] text-cloud-600 font-bold mt-1">April 2026</div>
+                                </div>
+                                <div class="bg-white/70 p-3 rounded-lg border border-white shadow-sm">
+                                    <div class="font-display text-xs font-bold text-slate-800">KNIME Analytics</div>
+                                    <div class="font-sans text-[11px] text-slate-500">L1 Basic Proficiency</div>
+                                    <div class="font-mono text-[10px] text-cloud-600 font-bold mt-1">Platform Certified</div>
+                                </div>
+                            </div>
+                        </div>
 
-                <div class="skill-card glass-card reveal-up" data-tilt style="animation-delay: 0.4s">
-                    <div class="skill-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" />
-                            <line x1="4" y1="22" x2="4" y2="15" />
-                        </svg>
-                    </div>
-                    <h3>Git &amp; GitHub</h3>
-                    <div class="skill-bar">
-                        <div class="skill-fill" data-level="85"></div>
-                    </div>
-                    <p>Version control, collaboration, branching strategies &amp; CI/CD workflows.</p>
-                </div>
+                        <!-- Awards & Academic Honors -->
+                        <div class="pt-1">
+                            <h4 class="font-mono text-xs font-bold uppercase tracking-wider text-cloud-600 mb-2 flex items-center gap-1.5">
+                                <i class="fa-solid fa-trophy"></i> Key Achievements &amp; Awards
+                            </h4>
+                            <div class="flex flex-wrap gap-1.5 text-xs font-mono">
+                                <span class="bg-white/80 text-slate-700 px-2.5 py-1 rounded border border-white shadow-sm font-bold flex items-center gap-1">
+                                    <i class="fa-solid fa-star text-amber-400"></i> 2x Director's List (2023, 2024)
+                                </span>
+                                <span class="bg-white/80 text-slate-700 px-2.5 py-1 rounded border border-white shadow-sm font-bold flex items-center gap-1">
+                                    <i class="fa-solid fa-medal text-amber-500"></i> Certificate of Achievement - Gold (ITE 2023)
+                                </span>
+                                <span class="bg-white/80 text-slate-700 px-2.5 py-1 rounded border border-white shadow-sm font-bold flex items-center gap-1">
+                                    <i class="fa-solid fa-award text-cloud-500"></i> Edusave Character Award 2024
+                                </span>
+                                <span class="bg-white/80 text-slate-700 px-2.5 py-1 rounded border border-white shadow-sm font-bold">
+                                    Edusave Academic Achievement (2022, 2024)
+                                </span>
+                                <span class="bg-white/80 text-slate-700 px-2.5 py-1 rounded border border-white shadow-sm font-bold">
+                                    Edusave Merit Bursary 2024
+                                </span>
+                                <span class="bg-white/80 text-slate-700 px-2.5 py-1 rounded border border-white shadow-sm font-bold">
+                                    National Youth Achievement Award (Bronze 2022)
+                                </span>
+                                <span class="bg-white/80 text-slate-700 px-2.5 py-1 rounded border border-white shadow-sm font-bold">
+                                    All Singapore Secondary Math Competition
+                                </span>
+                            </div>
+                        </div>
 
-                <div class="skill-card glass-card reveal-up" data-tilt style="animation-delay: 0.5s">
-                    <div class="skill-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <ellipse cx="12" cy="5" rx="9" ry="3" />
-                            <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
-                            <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
-                        </svg>
+                        <!-- Gamer Sub-class Box -->
+                        <div class="glass-panel-dark p-4 relative overflow-hidden rounded-lg border border-white/60 mt-2">
+                            <div class="flex items-center justify-between mb-2">
+                                <h4 class="font-display text-slate-800 font-bold uppercase flex items-center gap-2 text-sm">
+                                    <i class="fa-solid fa-gamepad text-cloud-500"></i> Secondary Class: Gamer &amp; Tactician
+                                </h4>
+                                <span class="font-mono text-[10px] text-slate-400 uppercase font-bold">Tactical Agility</span>
+                            </div>
+                            <p class="font-sans text-slate-600 text-xs mb-3 leading-relaxed">
+                                Strategy and RPG gaming sharpens analytical problem-solving, rapid decision-making under constraints, and coordinated team execution.
+                            </p>
+                            <div class="flex flex-wrap gap-2 text-[11px] uppercase tracking-wider font-bold">
+                                <span class="bg-white/70 text-slate-700 px-2.5 py-1 rounded border border-white shadow-sm flex items-center gap-1">
+                                    <i class="fa-solid fa-crosshairs text-cloud-500"></i> Tactical Strategy
+                                </span>
+                                <span class="bg-white/70 text-slate-700 px-2.5 py-1 rounded border border-white shadow-sm flex items-center gap-1">
+                                    <i class="fa-solid fa-shield-halved text-cloud-500"></i> RPG Mechanics
+                                </span>
+                                <span class="bg-white/70 text-slate-700 px-2.5 py-1 rounded border border-white shadow-sm flex items-center gap-1">
+                                    <i class="fa-brands fa-steam text-cloud-500"></i> PC Master Race
+                                </span>
+                            </div>
+                        </div>
                     </div>
-                    <h3>Databases</h3>
-                    <div class="skill-bar">
-                        <div class="skill-fill" data-level="70"></div>
-                    </div>
-                    <p>SQL, SQLite, PostgreSQL — designing schemas &amp; writing efficient queries.</p>
                 </div>
-
             </div>
-            <span class="section-tag closing-tag">&lt;/section&gt;</span>
         </div>
     </section>
 
-    <!-- ===================== PROJECTS ===================== -->
-    <section id="projects" class="section projects-section">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">&lt;section id="projects"&gt;</span>
-                <h2 class="section-title">Projects</h2>
+    <!-- Skill Tree Section (Capabilities & Resume Tech Stack) -->
+    <section id="skills" class="py-28 px-6 relative z-10">
+        <div class="max-w-6xl mx-auto">
+            <div class="mb-16 reveal flex flex-col md:flex-row md:items-end justify-between gap-4">
+                <div>
+                    <h3 class="font-mono text-cloud-500 font-bold uppercase tracking-widest mb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-bolt"></i> 02. Capabilities
+                    </h3>
+                    <h2 class="font-display text-4xl md:text-5xl font-bold text-slate-800 uppercase">Skill Tree</h2>
+                    <div class="w-24 h-1 bg-gradient-to-r from-cloud-400 to-cloud-200 mt-4 rounded-full"></div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="font-mono text-xs font-bold text-cloud-600 bg-white/70 backdrop-blur px-4 py-2 border border-white rounded shadow-sm">
+                        PROFICIENCY: <span class="text-slate-800">RESUME_V1 VERIFIED</span>
+                    </div>
+                    <div class="font-mono text-xs font-bold text-slate-600 bg-white/70 backdrop-blur px-3 py-2 border border-white rounded shadow-sm">
+                        RANK: <span class="text-cloud-600">S-TIER</span>
+                    </div>
+                </div>
             </div>
-            <div class="projects-grid">
 
-                <!-- Project 1: Bridgify -->
-                <article class="project-card glass-card reveal-up" id="bridgify-card" style="cursor: pointer;"
-                    onclick="document.getElementById('bridgify-modal').classList.add('active'); document.body.style.overflow='hidden';">
-                    <div class="project-image-wrapper">
-                        <img src="images/bridgify_Webpage.png" alt="Bridgify — Bridging Generations Together"
-                            class="project-image" />
-                        <div class="project-overlay">
-                            <span class="project-view">View Details</span>
+            <div class="grid md:grid-cols-2 gap-8 reveal">
+                <!-- Skill Category 1: Programming & Frameworks -->
+                <div class="glass-panel p-8 hud-border rounded-xl">
+                    <h3 class="font-display font-bold text-xl text-slate-800 uppercase mb-8 flex items-center gap-3 border-b border-white/50 pb-4">
+                        <i class="fa-solid fa-code text-cloud-500 text-2xl drop-shadow-sm"></i> Programming &amp; Frameworks
+                    </h3>
+                    
+                    <div class="space-y-6">
+                        <!-- Python -->
+                        <div>
+                            <div class="flex justify-between font-mono text-sm mb-2 text-slate-700 font-bold uppercase">
+                                <span>Python</span>
+                                <span class="text-cloud-600 bg-white/70 px-2 py-0.5 rounded text-xs border border-cloud-100">LVL 9</span>
+                            </div>
+                            <div class="skill-track" data-level="9" data-max="10"></div>
+                            <p class="font-sans text-xs text-slate-500 mt-1.5">Data analytics, algorithmic logic, Flask APIs &amp; automation scripts.</p>
+                        </div>
+
+                        <!-- JavaScript & React -->
+                        <div>
+                            <div class="flex justify-between font-mono text-sm mb-2 text-slate-700 font-bold uppercase">
+                                <span>JavaScript &amp; React</span>
+                                <span class="text-cloud-600 bg-white/70 px-2 py-0.5 rounded text-xs border border-cloud-100">LVL 8</span>
+                            </div>
+                            <div class="skill-track" data-level="8" data-max="10"></div>
+                            <p class="font-sans text-xs text-slate-500 mt-1.5">Component-driven architecture, interactive UIs &amp; state management.</p>
+                        </div>
+                        
+                        <!-- Backend / Node.js & Express / Flask -->
+                        <div>
+                            <div class="flex justify-between font-mono text-sm mb-2 text-slate-700 font-bold uppercase">
+                                <span>Node.js / Express.js &amp; Flask</span>
+                                <span class="text-cloud-600 bg-white/70 px-2 py-0.5 rounded text-xs border border-cloud-100">LVL 8</span>
+                            </div>
+                            <div class="skill-track" data-level="8" data-max="10"></div>
+                            <p class="font-sans text-xs text-slate-500 mt-1.5">RESTful endpoints, backend routing, session management &amp; authentication.</p>
+                        </div>
+
+                        <!-- HTML5 & CSS3 (Tailwind / Bootstrap 5) -->
+                        <div>
+                            <div class="flex justify-between font-mono text-sm mb-2 text-slate-700 font-bold uppercase">
+                                <span>HTML5, CSS3, Tailwind &amp; Bootstrap 5</span>
+                                <span class="text-cloud-600 bg-white/70 px-2 py-0.5 rounded text-xs border border-cloud-100">LVL 9</span>
+                            </div>
+                            <div class="skill-track" data-level="9" data-max="10"></div>
+                            <p class="font-sans text-xs text-slate-500 mt-1.5">Responsive design systems, semantic UI &amp; modern styling frameworks.</p>
                         </div>
                     </div>
-                    <div class="project-content">
-                        <div class="project-tags">
-                            <span class="tag">HTML</span>
-                            <span class="tag">CSS</span>
-                            <span class="tag">JavaScript</span>
+                </div>
+
+                <!-- Skill Category 2: Data, Databases & Software Testing -->
+                <div class="glass-panel p-8 hud-border rounded-xl">
+                    <h3 class="font-display font-bold text-xl text-slate-800 uppercase mb-8 flex items-center gap-3 border-b border-white/50 pb-4">
+                        <i class="fa-solid fa-database text-cloud-500 text-2xl drop-shadow-sm"></i> Data, Cloud &amp; QA Testing
+                    </h3>
+                    
+                    <div class="space-y-6">
+                        <!-- Relational Databases (MySQL & SQLite) -->
+                        <div>
+                            <div class="flex justify-between font-mono text-sm mb-2 text-slate-700 font-bold uppercase">
+                                <span>Relational SQL (MySQL &amp; SQLite)</span>
+                                <span class="text-cloud-600 bg-white/70 px-2 py-0.5 rounded text-xs border border-cloud-100">LVL 9</span>
+                            </div>
+                            <div class="skill-track" data-level="9" data-max="10"></div>
+                            <p class="font-sans text-xs text-slate-500 mt-1.5">Relational schema design, complex joins &amp; append-only ledger architecture.</p>
                         </div>
-                        <h3>Bridgify</h3>
-                        <p>A web-based platform designed to bridge the communication gap between seniors and youth
-                            through shared stories, community activities, and meaningful digital interaction. Seniors
-                            teach traditional skills while youth teach digital skills.</p>
 
-                    </div>
-                </article>
+                        <!-- Snowflake & KNIME Platform -->
+                        <div>
+                            <div class="flex justify-between font-mono text-sm mb-2 text-slate-700 font-bold uppercase">
+                                <span>Snowflake &amp; KNIME Analytics</span>
+                                <span class="text-cloud-600 bg-white/70 px-2 py-0.5 rounded text-xs border border-cloud-100">LVL 8</span>
+                            </div>
+                            <div class="skill-track" data-level="8" data-max="10"></div>
+                            <p class="font-sans text-xs text-slate-500 mt-1.5">Cloud data warehousing, workflow automation &amp; exploratory data analysis.</p>
+                        </div>
 
-                <!-- Project 2: Photography Club -->
-                <article class="project-card glass-card reveal-up" id="photography-card"
-                    style="cursor: pointer; animation-delay: 0.15s"
-                    onclick="document.getElementById('photography-modal').classList.add('active'); document.body.style.overflow='hidden';">
-                    <div class="project-image-wrapper">
-                        <img src="images/photographyclub_Webpage.png"
-                            alt="Photography Club — Capturing Creative Perspectives" class="project-image" />
-                        <div class="project-overlay">
-                            <span class="project-view">View Details</span>
+                        <!-- Software Testing & QA -->
+                        <div>
+                            <div class="flex justify-between font-mono text-sm mb-2 text-slate-700 font-bold uppercase">
+                                <span>Software Testing &amp; QA (Manual / Automated)</span>
+                                <span class="text-cloud-600 bg-white/70 px-2 py-0.5 rounded text-xs border border-cloud-100">LVL 9</span>
+                            </div>
+                            <div class="skill-track" data-level="9" data-max="10"></div>
+                            <p class="font-sans text-xs text-slate-500 mt-1.5">Industry testing at BeyondSoft: bug discovery, test cases &amp; system stability.</p>
+                        </div>
+
+                        <!-- Git & GitHub / Render -->
+                        <div>
+                            <div class="flex justify-between font-mono text-sm mb-2 text-slate-700 font-bold uppercase">
+                                <span>Git, GitHub &amp; Cloud Deployment (Render)</span>
+                                <span class="text-cloud-600 bg-white/70 px-2 py-0.5 rounded text-xs border border-cloud-100">LVL 8</span>
+                            </div>
+                            <div class="skill-track" data-level="8" data-max="10"></div>
+                            <p class="font-sans text-xs text-slate-500 mt-1.5">Version control, collaborative branches, CI workflows &amp; cloud hosting.</p>
                         </div>
                     </div>
-                    <div class="project-content">
-                        <div class="project-tags">
-                            <span class="tag">HTML</span>
-                            <span class="tag">CSS</span>
-                            <span class="tag">JavaScript</span>
-                        </div>
-                        <h3>Photography Club</h3>
-                        <p>A visual-centric platform showcasing artistic perspectives through high-quality digital
-                            imagery and storytelling — a hub for sharing techniques, organizing photo walks, and
-                            bridging camera mastery with creative expression.</p>
-
-                    </div>
-                </article>
-
-                <!-- Project 3: NotifyLeave -->
-                <article class="project-card glass-card reveal-up" id="notifyleave-card"
-                    style="cursor: pointer; animation-delay: 0.3s"
-                    onclick="document.getElementById('notifyleave-modal').classList.add('active'); document.body.style.overflow='hidden';">
-                    <div class="project-image-wrapper">
-                        <img src="images/notifyLeave_Webpage.png"
-                            alt="NotifyLeave — Streamlined Leave Management" class="project-image" />
-                        <div class="project-overlay">
-                            <span class="project-view">View Details</span>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <div class="project-tags">
-                            <span class="tag">React</span>
-                            <span class="tag">Node.js</span>
-                            <span class="tag">MySQL</span>
-                        </div>
-                        <h3>NotifyLeave</h3>
-                        <p>A comprehensive platform where employees apply for leave, managers approve it through a structured two-tier workflow, and HR administrators manage policies, holidays, and permissions.</p>
-
-                    </div>
-                </article>
-
+                </div>
             </div>
-            <span class="section-tag closing-tag">&lt;/section&gt;</span>
+            
+            <!-- Professional Strengths Banner (from resume) -->
+            <div class="glass-panel p-6 rounded-xl mt-8 border border-white reveal">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                        <h4 class="font-display text-sm uppercase tracking-wider font-bold text-slate-800">
+                            <i class="fa-solid fa-users-gear text-cloud-500 mr-2"></i> Professional Competencies:
+                        </h4>
+                        <p class="font-sans text-xs text-slate-500 mt-0.5">Core traits demonstrated in academic competitions and professional QA environments.</p>
+                    </div>
+                    <div class="flex flex-wrap gap-2 text-xs font-mono font-bold">
+                        <span class="bg-white/80 text-slate-700 px-3 py-1 rounded border border-white shadow-sm flex items-center gap-1.5">
+                            <i class="fa-solid fa-magnifying-glass text-cloud-500"></i> Analytical Problem-Solving
+                        </span>
+                        <span class="bg-white/80 text-slate-700 px-3 py-1 rounded border border-white shadow-sm flex items-center gap-1.5">
+                            <i class="fa-solid fa-handshake text-cloud-500"></i> Cross-Team Collaboration
+                        </span>
+                        <span class="bg-white/80 text-slate-700 px-3 py-1 rounded border border-white shadow-sm flex items-center gap-1.5">
+                            <i class="fa-solid fa-clock text-cloud-500"></i> Time Management
+                        </span>
+                        <span class="bg-white/80 text-slate-700 px-3 py-1 rounded border border-white shadow-sm flex items-center gap-1.5">
+                            <i class="fa-solid fa-arrows-rotate text-cloud-500"></i> Rapid Adaptability
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tech Stack Interactive Dock -->
+            <div class="mt-8 flex flex-wrap justify-center gap-8 reveal glass-panel py-6 px-8 rounded-xl mx-auto max-w-4xl border border-white">
+                <div class="flex flex-col items-center gap-2 group cursor-pointer">
+                    <i class="fa-brands fa-python text-4xl text-slate-400 group-hover:text-cloud-600 group-hover:scale-110 transition-all duration-300"></i>
+                    <span class="font-mono text-[10px] uppercase font-bold text-slate-500 opacity-70 group-hover:opacity-100 transition-opacity">Python</span>
+                </div>
+                <div class="flex flex-col items-center gap-2 group cursor-pointer">
+                    <i class="fa-brands fa-js text-4xl text-slate-400 group-hover:text-amber-500 group-hover:scale-110 transition-all duration-300"></i>
+                    <span class="font-mono text-[10px] uppercase font-bold text-slate-500 opacity-70 group-hover:opacity-100 transition-opacity">JavaScript</span>
+                </div>
+                <div class="flex flex-col items-center gap-2 group cursor-pointer">
+                    <i class="fa-brands fa-react text-4xl text-slate-400 group-hover:text-cyan-500 group-hover:scale-110 transition-all duration-300"></i>
+                    <span class="font-mono text-[10px] uppercase font-bold text-slate-500 opacity-70 group-hover:opacity-100 transition-opacity">React</span>
+                </div>
+                <div class="flex flex-col items-center gap-2 group cursor-pointer">
+                    <i class="fa-brands fa-node text-4xl text-slate-400 group-hover:text-emerald-500 group-hover:scale-110 transition-all duration-300"></i>
+                    <span class="font-mono text-[10px] uppercase font-bold text-slate-500 opacity-70 group-hover:opacity-100 transition-opacity">Node.js</span>
+                </div>
+                <div class="flex flex-col items-center gap-2 group cursor-pointer">
+                    <i class="fa-solid fa-snowflake text-4xl text-slate-400 group-hover:text-sky-500 group-hover:scale-110 transition-all duration-300"></i>
+                    <span class="font-mono text-[10px] uppercase font-bold text-slate-500 opacity-70 group-hover:opacity-100 transition-opacity">Snowflake</span>
+                </div>
+                <div class="flex flex-col items-center gap-2 group cursor-pointer">
+                    <i class="fa-solid fa-diagram-project text-4xl text-slate-400 group-hover:text-yellow-600 group-hover:scale-110 transition-all duration-300"></i>
+                    <span class="font-mono text-[10px] uppercase font-bold text-slate-500 opacity-70 group-hover:opacity-100 transition-opacity">KNIME</span>
+                </div>
+                <div class="flex flex-col items-center gap-2 group cursor-pointer">
+                    <i class="fa-solid fa-database text-4xl text-slate-400 group-hover:text-blue-500 group-hover:scale-110 transition-all duration-300"></i>
+                    <span class="font-mono text-[10px] uppercase font-bold text-slate-500 opacity-70 group-hover:opacity-100 transition-opacity">MySQL</span>
+                </div>
+                <div class="flex flex-col items-center gap-2 group cursor-pointer">
+                    <i class="fa-brands fa-github text-4xl text-slate-400 group-hover:text-slate-800 group-hover:scale-110 transition-all duration-300"></i>
+                    <span class="font-mono text-[10px] uppercase font-bold text-slate-500 opacity-70 group-hover:opacity-100 transition-opacity">GitHub</span>
+                </div>
+                <div class="flex flex-col items-center gap-2 group cursor-pointer">
+                    <i class="fa-solid fa-cloud-arrow-up text-4xl text-slate-400 group-hover:text-purple-500 group-hover:scale-110 transition-all duration-300"></i>
+                    <span class="font-mono text-[10px] uppercase font-bold text-slate-500 opacity-70 group-hover:opacity-100 transition-opacity">Render</span>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- ===================== CONTACT ===================== -->
-    <section id="contact" class="section contact-section">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-tag">&lt;section id="contact"&gt;</span>
-                <h2 class="section-title">Get In Touch</h2>
+    <!-- Quests / Mission Logs Section (Resume Projects) -->
+    <section id="quests" class="py-28 px-6 relative z-10">
+        <div class="max-w-6xl mx-auto">
+            <div class="mb-16 reveal flex flex-col md:flex-row md:items-end justify-between gap-4">
+                <div>
+                    <h3 class="font-mono text-cloud-500 font-bold uppercase tracking-widest mb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-folder-open"></i> 03. Archive
+                    </h3>
+                    <h2 class="font-display text-4xl md:text-5xl font-bold text-slate-800 uppercase">Mission Logs</h2>
+                    <div class="w-24 h-1 bg-gradient-to-r from-cloud-400 to-cloud-200 mt-4 rounded-full"></div>
+                </div>
+                <p class="font-mono text-xs font-bold text-slate-500 bg-white/70 backdrop-blur px-4 py-2 border border-white rounded shadow-sm">
+                    FEATURED_PROJECTS // [RESUME_V1]
+                </p>
             </div>
-            <div class="contact-grid">
-                <div class="contact-info reveal-left">
-                    <div class="code-comment">// let's connect</div>
-                    <p>Have a project idea, question, or just want to say hi? My inbox is always open. I'll get back to
-                        you as soon as possible!</p>
-                    <div class="contact-methods">
-                        <div class="contact-method glass-card">
-                            <div class="contact-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24"
-                                    height="24">
-                                    <path
-                                        d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                                    <polyline points="22,6 12,13 2,6" />
-                                </svg>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Project Card 1: NotifyLeave -->
+                <div class="group relative reveal flex flex-col" onclick="openModal('notifyleave-modal')">
+                    <!-- Targeting UI Hover Reticle -->
+                    <div class="target-reticle">
+                        <div class="bracket-tl"></div>
+                        <div class="bracket-tr"></div>
+                        <div class="bracket-bl"></div>
+                        <div class="bracket-br"></div>
+                    </div>
+
+                    <div class="glass-panel overflow-hidden relative z-10 h-full flex flex-col cursor-pointer transition-all duration-500 group-hover:-translate-y-2 rounded-xl">
+                        <!-- Image Container with HUD overlay -->
+                        <div class="h-56 bg-slate-100 relative overflow-hidden border-b border-white/60">
+                            <img src="images/notifyLeave_Webpage.png" alt="NotifyLeave Platform Preview" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700">
+                            
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent"></div>
+                            
+                            <!-- Category Badge -->
+                            <div class="absolute top-3 left-3 z-10 flex gap-2">
+                                <span class="bg-white/95 backdrop-blur font-mono text-[10px] uppercase px-2.5 py-1 font-bold border border-cloud-100 rounded text-purple-700 shadow-sm flex items-center gap-1.5">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-purple-500 animate-pulse"></span> Full-Stack Web App
+                                </span>
                             </div>
-                            <div>
-                                <span class="contact-label">Email</span>
-                                <a href="mailto:rainietan09022006@gmail.com"
-                                    class="contact-value">rainietan09022006@gmail.com</a>
-                            </div>
-                        </div>
-                        <div class="contact-method glass-card">
-                            <div class="contact-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24"
-                                    height="24">
-                                    <path
-                                        d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z" />
-                                    <rect x="2" y="9" width="4" height="12" />
-                                    <circle cx="4" cy="4" r="2" />
-                                </svg>
-                            </div>
-                            <div>
-                                <span class="contact-label">LinkedIn</span>
-                                <a href="https://www.linkedin.com/in/rainie-tan-994143296/" target="_blank"
-                                    class="contact-value">Rainie Tan</a>
+
+                            <div class="absolute bottom-3 right-3 z-10">
+                                <span class="bg-slate-900/80 text-white font-mono text-[10px] uppercase px-2.5 py-1 rounded backdrop-blur border border-white/20 group-hover:bg-cloud-500 transition-colors">
+                                    <i class="fa-solid fa-expand mr-1 text-[9px]"></i> View Specs
+                                </span>
                             </div>
                         </div>
-                        <a href="documents/Resume.pdf" download class="contact-method glass-card"
-                            style="text-decoration: none;">
-                            <div class="contact-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24"
-                                    height="24">
-                                    <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
-                                    <polyline points="14 2 14 8 20 8" />
-                                    <line x1="12" y1="18" x2="12" y2="12" />
-                                    <polyline points="9 15 12 18 15 15" />
-                                </svg>
+
+                        <!-- Content -->
+                        <div class="p-6 flex-grow flex flex-col">
+                            <div class="flex flex-wrap gap-1.5 mb-3">
+                                <span class="bg-white/70 text-slate-600 text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded border border-white">React</span>
+                                <span class="bg-white/70 text-slate-600 text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded border border-white">Node.js</span>
+                                <span class="bg-white/70 text-slate-600 text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded border border-white">Express</span>
+                                <span class="bg-white/70 text-slate-600 text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded border border-white">MySQL</span>
+                            </div>
+                            
+                            <h3 class="font-display text-xl font-bold text-slate-800 uppercase mb-2 group-hover:text-cloud-600 transition-colors">
+                                NotifyLeave
+                            </h3>
+                            
+                            <p class="font-sans text-slate-600 text-sm mb-5 flex-grow leading-relaxed">
+                                Centralized automated leave management platform with dynamic append-only ledger, two-tier approval workflow, and real-time team manpower metrics.
+                            </p>
+                            
+                            <div class="pt-3 border-t border-white/60 flex items-center justify-between text-xs font-mono font-bold text-cloud-600">
+                                <span>[ STATUS: OPERATIONAL ]</span>
+                                <span class="group-hover:translate-x-1 transition-transform flex items-center gap-1">Details <i class="fa-solid fa-arrow-right text-[10px]"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Card 2: Bridgify -->
+                <div class="group relative reveal flex flex-col" style="transition-delay: 150ms;" onclick="openModal('bridgify-modal')">
+                    <!-- Targeting UI Hover Reticle -->
+                    <div class="target-reticle">
+                        <div class="bracket-tl"></div>
+                        <div class="bracket-tr"></div>
+                        <div class="bracket-bl"></div>
+                        <div class="bracket-br"></div>
+                    </div>
+
+                    <div class="glass-panel overflow-hidden relative z-10 h-full flex flex-col cursor-pointer transition-all duration-500 group-hover:-translate-y-2 rounded-xl">
+                        <!-- Image Container with HUD overlay -->
+                        <div class="h-56 bg-slate-100 relative overflow-hidden border-b border-white/60">
+                            <img src="images/bridgify_Webpage.png" alt="Bridgify Platform Preview" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700">
+                            
+                            <!-- Soft gradient overlay -->
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent"></div>
+                            
+                            <!-- Category Badge -->
+                            <div class="absolute top-3 left-3 z-10 flex gap-2">
+                                <span class="bg-white/95 backdrop-blur font-mono text-[10px] uppercase px-2.5 py-1 font-bold border border-cloud-100 rounded text-emerald-700 shadow-sm flex items-center gap-1.5">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> Full-Stack Web App
+                                </span>
+                            </div>
+
+                            <div class="absolute bottom-3 right-3 z-10">
+                                <span class="bg-slate-900/80 text-white font-mono text-[10px] uppercase px-2.5 py-1 rounded backdrop-blur border border-white/20 group-hover:bg-cloud-500 transition-colors">
+                                    <i class="fa-solid fa-expand mr-1 text-[9px]"></i> View Specs
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Content -->
+                        <div class="p-6 flex-grow flex flex-col">
+                            <div class="flex flex-wrap gap-1.5 mb-3">
+                                <span class="bg-white/70 text-slate-600 text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded border border-white">HTML5</span>
+                                <span class="bg-white/70 text-slate-600 text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded border border-white">CSS3</span>
+                                <span class="bg-white/70 text-slate-600 text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded border border-white">JavaScript</span>
+                                <span class="bg-white/70 text-slate-600 text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded border border-white">Flask</span>
+                                <span class="bg-white/70 text-slate-600 text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded border border-white">SQLite</span>
+                            </div>
+                            
+                            <h3 class="font-display text-xl font-bold text-slate-800 uppercase mb-2 group-hover:text-cloud-600 transition-colors">
+                                Bridgify
+                            </h3>
+                            
+                            <p class="font-sans text-slate-600 text-sm mb-5 flex-grow leading-relaxed">
+                                Intergenerational mentoring platform combating social isolation with SQLite relational database, skills marketplace, and storytelling journal.
+                            </p>
+                            
+                            <div class="pt-3 border-t border-white/60 flex items-center justify-between text-xs font-mono font-bold text-cloud-600">
+                                <span>[ STATUS: DEPLOYED ]</span>
+                                <span class="group-hover:translate-x-1 transition-transform flex items-center gap-1">Details <i class="fa-solid fa-arrow-right text-[10px]"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Card 3: Photography Club -->
+                <div class="group relative reveal flex flex-col" style="transition-delay: 300ms;" onclick="openModal('photography-modal')">
+                    <!-- Targeting UI Hover Reticle -->
+                    <div class="target-reticle">
+                        <div class="bracket-tl"></div>
+                        <div class="bracket-tr"></div>
+                        <div class="bracket-bl"></div>
+                        <div class="bracket-br"></div>
+                    </div>
+
+                    <div class="glass-panel overflow-hidden relative z-10 h-full flex flex-col cursor-pointer transition-all duration-500 group-hover:-translate-y-2 rounded-xl">
+                        <!-- Image Container with HUD overlay -->
+                        <div class="h-56 bg-slate-100 relative overflow-hidden border-b border-white/60">
+                            <img src="images/photographyclub_Webpage.png" alt="Photography Club Website Preview" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700">
+                            
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent"></div>
+                            
+                            <!-- Category Badge -->
+                            <div class="absolute top-3 left-3 z-10 flex gap-2">
+                                <span class="bg-white/95 backdrop-blur font-mono text-[10px] uppercase px-2.5 py-1 font-bold border border-cloud-100 rounded text-blue-700 shadow-sm flex items-center gap-1.5">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></span> Front-End Web Dev
+                                </span>
+                            </div>
+
+                            <div class="absolute bottom-3 right-3 z-10">
+                                <span class="bg-slate-900/80 text-white font-mono text-[10px] uppercase px-2.5 py-1 rounded backdrop-blur border border-white/20 group-hover:bg-cloud-500 transition-colors">
+                                    <i class="fa-solid fa-expand mr-1 text-[9px]"></i> View Specs
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Content -->
+                        <div class="p-6 flex-grow flex flex-col">
+                            <div class="flex flex-wrap gap-1.5 mb-3">
+                                <span class="bg-white/70 text-slate-600 text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded border border-white">HTML5</span>
+                                <span class="bg-white/70 text-slate-600 text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded border border-white">CSS3</span>
+                                <span class="bg-white/70 text-slate-600 text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded border border-white">Bootstrap 5</span>
+                                <span class="bg-white/70 text-slate-600 text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded border border-white">JavaScript</span>
+                            </div>
+                            
+                            <h3 class="font-display text-xl font-bold text-slate-800 uppercase mb-2 group-hover:text-cloud-600 transition-colors">
+                                Photography Club
+                            </h3>
+                            
+                            <p class="font-sans text-slate-600 text-sm mb-5 flex-grow leading-relaxed">
+                                Responsive multimedia website aligned with IBM SkillsBuild practices, featuring custom-built interactive membership forms and clean UI/UX architecture.
+                            </p>
+                            
+                            <div class="pt-3 border-t border-white/60 flex items-center justify-between text-xs font-mono font-bold text-cloud-600">
+                                <span>[ STATUS: VERIFIED ]</span>
+                                <span class="group-hover:translate-x-1 transition-transform flex items-center gap-1">Details <i class="fa-solid fa-arrow-right text-[10px]"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-14 text-center reveal">
+                <a href="https://github.com/RaynKaiser" target="_blank" class="inline-flex items-center gap-3 font-display font-bold uppercase tracking-widest text-slate-700 hover:text-cloud-600 transition-all group bg-white/60 hover:bg-white px-7 py-3.5 rounded-full border border-white shadow-sm hover:shadow-md">
+                    <i class="fa-brands fa-github text-lg text-slate-800"></i> View Full GitHub Repository <i class="fa-solid fa-arrow-right group-hover:translate-x-1.5 transition-transform text-xs"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Transmission / Contact Section (Resume Synchronized) -->
+    <section id="contact" class="py-28 px-6 relative z-10">
+        <div class="max-w-6xl mx-auto">
+            <div class="mb-16 reveal">
+                <h3 class="font-mono text-cloud-500 font-bold uppercase tracking-widest mb-2 flex items-center gap-2">
+                    <i class="fa-solid fa-satellite-dish"></i> 04. Transmission
+                </h3>
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-slate-800 uppercase">Establish Link</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-cloud-400 to-cloud-200 mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid md:grid-cols-12 gap-10 items-stretch reveal">
+                <!-- Contact Channels -->
+                <div class="md:col-span-5 flex flex-col justify-between space-y-6">
+                    <div>
+                        <div class="font-mono text-xs font-bold uppercase tracking-wider text-cloud-600 mb-2">// DIRECT_COMMS</div>
+                        <h3 class="font-display text-2xl font-bold text-slate-800 uppercase mb-4">Let's Connect</h3>
+                        <p class="font-sans text-slate-600 leading-relaxed text-sm mb-6">
+                            Actively seeking a <strong class="text-slate-800 font-semibold">1-year internship</strong> in Applied AI, Software Engineering, or Data Analytics. Feel free to download my official resume or transmit a direct communication below.
+                        </p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <!-- Official Resume Download -->
+                        <a href="documents/TanWenJingRainie_Resume_V1.pdf" download="TanWenJingRainie_Resume_V1.pdf" class="glass-panel p-4 rounded-xl flex items-center gap-4 hover:border-cloud-300 transition-all duration-300 group border-cloud-200 bg-white/70">
+                            <div class="w-12 h-12 rounded-lg bg-emerald-50 shadow-sm border border-emerald-200 flex items-center justify-center text-emerald-600 group-hover:scale-110 transition-all">
+                                <i class="fa-solid fa-file-arrow-down text-xl"></i>
                             </div>
                             <div>
-                                <span class="contact-label">Resume</span>
-                                <span class="contact-value">Download PDF</span>
+                                <span class="font-mono text-[10px] uppercase font-bold text-emerald-700 block tracking-wider">Official Resume (V1)</span>
+                                <span class="font-mono text-xs md:text-sm font-bold text-slate-800 block group-hover:text-cloud-600 transition-colors">Download TanWenJingRainie_Resume_V1.pdf</span>
                             </div>
                         </a>
-                        <div class="contact-method glass-card">
-                            <div class="contact-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24"
-                                    height="24">
-                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
-                                    <circle cx="12" cy="10" r="3" />
-                                </svg>
+
+                        <!-- Email -->
+                        <a href="mailto:rainietan09022006@gmail.com" class="glass-panel p-4 rounded-xl flex items-center gap-4 hover:border-cloud-300 transition-all duration-300 group">
+                            <div class="w-12 h-12 rounded-lg bg-white/80 shadow-sm border border-white flex items-center justify-center text-cloud-500 group-hover:scale-110 group-hover:text-cloud-600 transition-all">
+                                <i class="fa-solid fa-envelope text-xl"></i>
+                            </div>
+                            <div class="overflow-hidden">
+                                <span class="font-mono text-[10px] uppercase font-bold text-slate-400 block tracking-wider">Email Protocol</span>
+                                <span class="font-mono text-xs md:text-sm font-bold text-slate-800 truncate block group-hover:text-cloud-600 transition-colors">rainietan09022006@gmail.com</span>
+                            </div>
+                        </a>
+
+                        <!-- LinkedIn -->
+                        <a href="https://www.linkedin.com/in/rainie-tan-994143296/" target="_blank" class="glass-panel p-4 rounded-xl flex items-center gap-4 hover:border-cloud-300 transition-all duration-300 group">
+                            <div class="w-12 h-12 rounded-lg bg-white/80 shadow-sm border border-white flex items-center justify-center text-blue-500 group-hover:scale-110 transition-all">
+                                <i class="fa-brands fa-linkedin-in text-xl"></i>
                             </div>
                             <div>
-                                <span class="contact-label">Location</span>
-                                <span class="contact-value">Singapore</span>
+                                <span class="font-mono text-[10px] uppercase font-bold text-slate-400 block tracking-wider">Network Link</span>
+                                <span class="font-mono text-xs md:text-sm font-bold text-slate-800 block group-hover:text-cloud-600 transition-colors">Rainie Tan on LinkedIn</span>
+                            </div>
+                        </a>
+
+                        <!-- Location -->
+                        <div class="glass-panel p-4 rounded-xl flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-lg bg-white/80 shadow-sm border border-white flex items-center justify-center text-rose-500">
+                                <i class="fa-solid fa-location-dot text-xl"></i>
+                            </div>
+                            <div>
+                                <span class="font-mono text-[10px] uppercase font-bold text-slate-400 block tracking-wider">Base Coordinates</span>
+                                <span class="font-mono text-xs md:text-sm font-bold text-slate-800 block">Singapore</span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="contact-form-wrapper reveal-right">
-                    <div class="code-editor-frame">
-                        <div class="code-frame-header">
-                            <span class="dot red"></span>
-                            <span class="dot yellow"></span>
-                            <span class="dot green"></span>
-                            <span class="code-filename">message.js</span>
+
+                <!-- Code Editor Transmission Terminal Form -->
+                <div class="md:col-span-7 flex flex-col">
+                    <div class="glass-panel hud-border rounded-xl overflow-hidden shadow-lg border border-white flex flex-col h-full">
+                        <!-- Terminal Frame Header -->
+                        <div class="bg-white/60 px-5 py-3 border-b border-white/80 flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <span class="w-3 h-3 rounded-full bg-rose-400 inline-block shadow-sm"></span>
+                                <span class="w-3 h-3 rounded-full bg-amber-400 inline-block shadow-sm"></span>
+                                <span class="w-3 h-3 rounded-full bg-emerald-400 inline-block shadow-sm"></span>
+                            </div>
+                            <span class="font-mono text-xs text-slate-500 font-bold">transmission_protocol.sh // rainie@cloud.sys</span>
                         </div>
-                        <form id="contact-form" class="contact-form" autocomplete="off">
-                            <div class="form-line">
-                                <span class="line-number">1</span>
-                                <span class="code-keyword">const</span> <span class="code-var">name</span> =
-                                <input type="text" id="contact-name" name="name" placeholder='"Your Name"' required />
+
+                        <!-- Form Body -->
+                        <form id="contact-form" class="p-6 md:p-8 flex flex-col justify-between flex-grow space-y-5" autocomplete="off">
+                            <div class="space-y-4">
+                                <!-- Name -->
+                                <div>
+                                    <label for="contact-name" class="block font-mono text-xs font-bold text-slate-700 uppercase mb-1">
+                                        <span class="text-cloud-500 mr-1.5">[01]</span> const <span class="text-cloud-600">sender_name</span> =
+                                    </label>
+                                    <input type="text" id="contact-name" name="name" required placeholder='"Recruiter / Collaborator Name"' 
+                                        class="w-full bg-white/70 border border-white rounded-lg px-4 py-2.5 font-mono text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cloud-400 focus:bg-white transition-all shadow-inner">
+                                </div>
+
+                                <!-- Email -->
+                                <div>
+                                    <label for="contact-email" class="block font-mono text-xs font-bold text-slate-700 uppercase mb-1">
+                                        <span class="text-cloud-500 mr-1.5">[02]</span> const <span class="text-cloud-600">sender_email</span> =
+                                    </label>
+                                    <input type="email" id="contact-email" name="email" required placeholder='"recruiter@company.com"' 
+                                        class="w-full bg-white/70 border border-white rounded-lg px-4 py-2.5 font-mono text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cloud-400 focus:bg-white transition-all shadow-inner">
+                                </div>
+
+                                <!-- Subject -->
+                                <div>
+                                    <label for="contact-subject" class="block font-mono text-xs font-bold text-slate-700 uppercase mb-1">
+                                        <span class="text-cloud-500 mr-1.5">[03]</span> const <span class="text-cloud-600">transmission_subject</span> =
+                                    </label>
+                                    <input type="text" id="contact-subject" name="subject" required placeholder='"Internship Opportunity / Project Inquiry"' 
+                                        class="w-full bg-white/70 border border-white rounded-lg px-4 py-2.5 font-mono text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cloud-400 focus:bg-white transition-all shadow-inner">
+                                </div>
+
+                                <!-- Message -->
+                                <div>
+                                    <label for="contact-message" class="block font-mono text-xs font-bold text-slate-700 uppercase mb-1">
+                                        <span class="text-cloud-500 mr-1.5">[04]</span> const <span class="text-cloud-600">payload_message</span> =
+                                    </label>
+                                    <textarea id="contact-message" name="message" rows="4" required placeholder='"Type transmission content or internship details here..."' 
+                                        class="w-full bg-white/70 border border-white rounded-lg px-4 py-2.5 font-mono text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cloud-400 focus:bg-white transition-all shadow-inner resize-none"></textarea>
+                                </div>
                             </div>
-                            <div class="form-line">
-                                <span class="line-number">2</span>
-                                <span class="code-keyword">const</span> <span class="code-var">email</span> =
-                                <input type="email" id="contact-email" name="email" placeholder='"you@email.com"'
-                                    required />
-                            </div>
-                            <div class="form-line">
-                                <span class="line-number">3</span>
-                                <span class="code-keyword">const</span> <span class="code-var">subject</span> =
-                                <input type="text" id="contact-subject" name="subject" placeholder='"Subject"'
-                                    required />
-                            </div>
-                            <div class="form-line form-line-textarea">
-                                <span class="line-number">4</span>
-                                <span class="code-keyword">const</span> <span class="code-var">message</span> =
-                                <textarea id="contact-message" name="message" rows="5" placeholder='"Your message..."'
-                                    required></textarea>
-                            </div>
-                            <div class="form-line">
-                                <span class="line-number">5</span>
-                                <button type="submit" class="btn btn-primary btn-submit">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                        width="18" height="18" style="margin-right: 0.5rem;">
-                                        <line x1="22" y1="2" x2="11" y2="13" />
-                                        <polygon points="22 2 15 22 11 13 2 9 22 2" />
-                                    </svg>
-                                    Send Message
-                                </button>
-                            </div>
+
+                            <button type="submit" id="submit-btn" class="w-full py-4 px-6 bg-slate-800 hover:bg-cloud-500 text-white font-mono font-bold tracking-widest uppercase rounded-lg transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center gap-2 group mt-2">
+                                <i class="fa-solid fa-paper-plane group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                                <span id="submit-btn-text">TRANSMIT_MESSAGE()</span>
+                            </button>
                         </form>
                     </div>
                 </div>
             </div>
-            <span class="section-tag closing-tag">&lt;/section&gt;</span>
         </div>
     </section>
 
-    <!-- ===================== FOOTER ===================== -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <span class="logo-bracket">&lt;</span><span class="logo-name">Rainie</span><span
-                        class="logo-bracket"> /&gt;</span>
-                </div>
-                <p class="footer-text">
-                    <span class="code-comment">/* Crafted with </span>
-                    <span class="heart">&#10084;</span>
-                    <span class="code-comment"> and lots of coffee ☕ */</span>
+    <!-- Footer / Terminal Console -->
+    <footer class="bg-white/40 backdrop-blur-xl border-t border-white/80 relative z-10 py-12 px-6 mt-16">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+            
+            <div class="font-mono text-xs text-slate-500 space-y-2 text-center md:text-left">
+                <p class="flex items-center justify-center md:justify-start gap-2">
+                    <i class="fa-solid fa-chevron-right text-cloud-500"></i> SYSTEM: Awaiting new commands...
                 </p>
-                <div class="footer-socials">
-                    <a href="https://www.linkedin.com/in/rainie-tan-994143296/" target="_blank" class="social-link"
-                        aria-label="LinkedIn">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22"
-                            height="22">
-                            <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z" />
-                            <rect x="2" y="9" width="4" height="12" />
-                            <circle cx="4" cy="4" r="2" />
-                        </svg>
-                    </a>
-                    <a href="mailto:rainietan09022006@gmail.com" class="social-link" aria-label="Email">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22"
-                            height="22">
-                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                            <polyline points="22,6 12,13 2,6" />
-                        </svg>
-                    </a>
-                </div>
-                <p class="footer-copy">&copy; 2026 Rainie. All rights reserved.</p>
+                <p class="flex items-center justify-center md:justify-start gap-2">
+                    <i class="fa-solid fa-chevron-right text-cloud-500"></i> <span class="text-slate-800 font-bold">&copy; <span id="year"></span> TAN WEN JING RAINIE. ALL RIGHTS RESERVED.</span>
+                </p>
             </div>
+
+            <div class="flex gap-4">
+                <a href="mailto:rainietan09022006@gmail.com" class="w-12 h-12 bg-white/70 rounded-full border border-white shadow-sm flex items-center justify-center text-slate-500 hover:text-cloud-600 hover:scale-110 hover:shadow-md transition-all duration-300" aria-label="Send Email">
+                    <i class="fa-solid fa-envelope text-lg"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/rainie-tan-994143296/" target="_blank" class="w-12 h-12 bg-white/70 rounded-full border border-white shadow-sm flex items-center justify-center text-slate-500 hover:text-cloud-600 hover:scale-110 hover:shadow-md transition-all duration-300" aria-label="LinkedIn Profile">
+                    <i class="fa-brands fa-linkedin-in text-lg"></i>
+                </a>
+                <a href="https://github.com/RaynKaiser" target="_blank" class="w-12 h-12 bg-white/70 rounded-full border border-white shadow-sm flex items-center justify-center text-slate-500 hover:text-cloud-600 hover:scale-110 hover:shadow-md transition-all duration-300" aria-label="GitHub Profile">
+                    <i class="fa-brands fa-github text-lg"></i>
+                </a>
+            </div>
+            
         </div>
     </footer>
 
-    <!-- ===================== BRIDGIFY MODAL ===================== -->
-    <div id="bridgify-modal" class="project-modal">
-        <div class="project-modal-overlay"
-            onclick="document.getElementById('bridgify-modal').classList.remove('active'); document.body.style.overflow='';">
-        </div>
-        <div class="project-modal-content glass-card">
-            <button class="modal-close"
-                onclick="document.getElementById('bridgify-modal').classList.remove('active'); document.body.style.overflow='';"
-                aria-label="Close modal">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
-                    <line x1="18" y1="6" x2="6" y2="18" />
-                    <line x1="6" y1="6" x2="18" y2="18" />
-                </svg>
-            </button>
-            <div class="modal-body">
-                <div class="modal-image">
-                    <img src="images/bridgify_Webpage.png" alt="Bridgify Platform Preview" />
+    <!-- ===================== NOTIFYLEAVE DETAIL MODAL ===================== -->
+    <div id="notifyleave-modal" class="project-modal" role="dialog" aria-modal="true" aria-labelledby="notifyleave-title">
+        <div class="project-modal-overlay" onclick="closeModal('notifyleave-modal')"></div>
+        <div class="project-modal-content p-6 md:p-8">
+            <div class="flex items-start justify-between border-b border-slate-200/80 pb-4 mb-6">
+                <div>
+                    <div class="flex items-center gap-2 mb-1">
+                        <span class="font-mono text-xs font-bold text-cloud-600 uppercase tracking-widest">// MISSION_01</span>
+                        <span class="bg-purple-100 text-purple-700 font-mono text-[10px] font-bold px-2 py-0.5 rounded border border-purple-200">FULL-STACK WEB APP</span>
+                    </div>
+                    <h2 id="notifyleave-title" class="font-display text-2xl md:text-3xl font-bold text-slate-800 uppercase">NotifyLeave</h2>
                 </div>
-                <div class="modal-details">
-                    <h2 class="modal-title">Bridgify</h2>
-                    <div class="modal-tags">
-                        <span class="tag">HTML</span>
-                        <span class="tag">CSS</span>
-                        <span class="tag">JavaScript</span>
-                        <span class="tag">Flask</span>
-                        <span class="tag">SQLite</span>
-                    </div>
+                <button onclick="closeModal('notifyleave-modal')" class="w-10 h-10 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-800 transition-colors flex items-center justify-center" aria-label="Close modal">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
 
-                    <div class="modal-section">
-                        <h3>Project Overview</h3>
-                        <p><strong>Mission:</strong> To bridge the communication gap between generations through shared
-                            experiences and meaningful digital interaction.</p>
-                        <p><strong>Core Concept:</strong> A reciprocal platform where seniors share traditional skills
-                            fading from modern society, while youth provide digital skills and mentorship.</p>
-                        <p><strong>Key Impact:</strong> Combats social isolation for seniors and provides youth with
-                            access to unique life skills and meaningful mentorship.</p>
-                    </div>
+            <div class="space-y-6">
+                <div class="rounded-xl overflow-hidden border border-white shadow-sm bg-slate-100 max-h-80">
+                    <img src="images/notifyLeave_Webpage.png" alt="NotifyLeave Platform Full Preview" class="w-full h-full object-cover object-top">
+                </div>
 
-                    <div class="modal-section">
-                        <h3>The Problem &amp; Solution</h3>
-                        <p><strong>Challenge:</strong> Seniors often face social isolation, while youth lack deep
-                            interaction with older generations and over-rely on digital tutorials rather than personal
-                            mentorship.</p>
-                        <p><strong>Solution:</strong> A sustainable digital ecosystem and centralized system that
-                            fosters long-term engagement and community building.</p>
-                    </div>
+                <div class="flex flex-wrap gap-2">
+                    <span class="bg-cloud-100 text-cloud-700 font-mono text-xs font-bold px-3 py-1 rounded border border-cloud-200">React</span>
+                    <span class="bg-cloud-100 text-cloud-700 font-mono text-xs font-bold px-3 py-1 rounded border border-cloud-200">JavaScript</span>
+                    <span class="bg-cloud-100 text-cloud-700 font-mono text-xs font-bold px-3 py-1 rounded border border-cloud-200">Node.js</span>
+                    <span class="bg-cloud-100 text-cloud-700 font-mono text-xs font-bold px-3 py-1 rounded border border-cloud-200">Express.js</span>
+                    <span class="bg-cloud-100 text-cloud-700 font-mono text-xs font-bold px-3 py-1 rounded border border-cloud-200">MySQL</span>
+                </div>
 
-                    <div class="modal-section">
-                        <h3>Key Technical Features</h3>
-                        <ul class="modal-features">
-                            <li><strong>Skills Market</strong> — Browse and manage skills to teach or learn, from
-                                cooking to digital literacy.</li>
-                            <li><strong>The Journal</strong> — A digital storytelling space where seniors share memories
-                                via text, photos, or audio.</li>
-                            <li><strong>Event Management</strong> — Discover and join intergenerational activities with
-                                booking calendars and admin tools.</li>
-                            <li><strong>Community Groups</strong> — Interest-based discussion groups for casual
-                                activities and connection.</li>
-                            <li><strong>Profile &amp; Privacy</strong> — Personalised accounts to track progress, set
-                                preferences, and manage visibility.</li>
-                        </ul>
-                    </div>
+                <div class="glass-panel-dark p-5 rounded-xl border border-white">
+                    <h3 class="font-display font-bold text-slate-800 uppercase text-base mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-compass text-cloud-500"></i> Project Architecture &amp; Overview
+                    </h3>
+                    <p class="text-slate-600 text-sm font-sans leading-relaxed">
+                        Developed a centralized, automated leave management platform featuring a robust Role-Based Access Control (RBAC) system to streamline employee requests, management approvals, and HR administration.
+                    </p>
+                </div>
 
-                    <div class="modal-section">
-                        <h3>Outcome &amp; Value</h3>
-                        <p><strong>For Seniors:</strong> Empowerment through sharing life experiences and connecting
-                            with a wider community.</p>
-                        <p><strong>For Youth:</strong> Development of empathy and cross-generational understanding
-                            through unique mentorship.</p>
-                        <p><strong>Community Goal:</strong> Preserving cultural heritage so that no generation is left
-                            behind.</p>
-                    </div>
+                <div class="glass-panel-dark p-5 rounded-xl border border-white">
+                    <h3 class="font-display font-bold text-slate-800 uppercase text-base mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-gear text-cloud-500"></i> Core Engineering Features (Resume Verified)
+                    </h3>
+                    <ul class="space-y-3 text-slate-600 text-sm font-sans">
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-check text-cloud-500 mt-1 text-xs"></i>
+                            <div><strong class="text-slate-800 font-mono">Role-Based Access Control (RBAC):</strong> Secure role separation across Employees, Supervisors, Department Managers, and HR Administrators for request submissions, multi-level approvals, and policy configs.</div>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-check text-cloud-500 mt-1 text-xs"></i>
+                            <div><strong class="text-slate-800 font-mono">Dynamic Append-Only Leave Ledger:</strong> Engineered an immutable ledger for precise balance tracking, carry-overs, adjustments, and verifiable audit trails.</div>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-check text-cloud-500 mt-1 text-xs"></i>
+                            <div><strong class="text-slate-800 font-mono">Two-Tier Approval Workflow:</strong> Structured management approval engine that intelligently routes requests and dynamically accounts for manager availability.</div>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-check text-cloud-500 mt-1 text-xs"></i>
+                            <div><strong class="text-slate-800 font-mono">Manpower Metrics &amp; Team Calendars:</strong> Real-time coverage dashboards and shared team calendars with region-aware configurations to proactively flag potential headcount shortages.</div>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- ===================== PHOTOGRAPHY MODAL ===================== -->
-    <div id="photography-modal" class="project-modal">
-        <div class="project-modal-overlay"
-            onclick="document.getElementById('photography-modal').classList.remove('active'); document.body.style.overflow='';">
-        </div>
-        <div class="project-modal-content glass-card">
-            <button class="modal-close"
-                onclick="document.getElementById('photography-modal').classList.remove('active'); document.body.style.overflow='';"
-                aria-label="Close modal">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
-                    <line x1="18" y1="6" x2="6" y2="18" />
-                    <line x1="6" y1="6" x2="18" y2="18" />
-                </svg>
-            </button>
-            <div class="modal-body">
-                <div class="modal-image">
-                    <img src="images/photographyclub_Webpage.png" alt="Photography Club Website Preview" />
+    <!-- ===================== BRIDGIFY DETAIL MODAL ===================== -->
+    <div id="bridgify-modal" class="project-modal" role="dialog" aria-modal="true" aria-labelledby="bridgify-title">
+        <div class="project-modal-overlay" onclick="closeModal('bridgify-modal')"></div>
+        <div class="project-modal-content p-6 md:p-8">
+            <div class="flex items-start justify-between border-b border-slate-200/80 pb-4 mb-6">
+                <div>
+                    <div class="flex items-center gap-2 mb-1">
+                        <span class="font-mono text-xs font-bold text-cloud-600 uppercase tracking-widest">// MISSION_02</span>
+                        <span class="bg-emerald-100 text-emerald-700 font-mono text-[10px] font-bold px-2 py-0.5 rounded border border-emerald-200">FULL-STACK WEB APP</span>
+                    </div>
+                    <h2 id="bridgify-title" class="font-display text-2xl md:text-3xl font-bold text-slate-800 uppercase">Bridgify</h2>
                 </div>
-                <div class="modal-details">
-                    <h2 class="modal-title">Photography Club</h2>
-                    <div class="modal-tags">
-                        <span class="tag">HTML5</span>
-                        <span class="tag">CSS3</span>
-                        <span class="tag">JavaScript</span>
-                        <span class="tag">Bootstrap 5</span>
-                    </div>
+                <button onclick="closeModal('bridgify-modal')" class="w-10 h-10 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-800 transition-colors flex items-center justify-center" aria-label="Close modal">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
 
-                    <div class="modal-section">
-                        <h3>Project Overview</h3>
-                        <p>Developed as a centerpiece for a digital portfolio, this project involved designing and
-                            coding a comprehensive website for a School Photography Club. The primary goal was to create
-                            a digital presence that effectively markets the club to prospective members while
-                            demonstrating proficiency in modern front-end development standards.</p>
-                    </div>
+            <div class="space-y-6">
+                <div class="rounded-xl overflow-hidden border border-white shadow-sm bg-slate-100 max-h-80">
+                    <img src="images/bridgify_Webpage.png" alt="Bridgify Platform Full Preview" class="w-full h-full object-cover object-top">
+                </div>
 
-                    <div class="modal-section">
-                        <h3>Key Technical Features</h3>
-                        <ul class="modal-features">
-                            <li><strong>Responsive Framework</strong> — Implemented Bootstrap 5 to ensure the website is
-                                fully responsive and adaptive across various devices.</li>
-                            <li><strong>Core Web Technologies</strong> — Developed using a clean architecture of HTML5,
-                                CSS3, and Vanilla JavaScript, strictly avoiding external frameworks to demonstrate core
-                                coding logic.</li>
-                            <li><strong>Interactive Elements</strong> — Features a custom-built membership interest form
-                                with a dedicated response page to display user-entered data.</li>
-                            <li><strong>Multimedia Integration</strong> — Integrated high-resolution image galleries and
-                                video content to showcase the club's activities.</li>
-                            <li><strong>Structured Navigation</strong> — Designed an intuitive navigation menu to allow
-                                seamless access across four distinct web pages.</li>
-                        </ul>
-                    </div>
+                <div class="flex flex-wrap gap-2">
+                    <span class="bg-cloud-100 text-cloud-700 font-mono text-xs font-bold px-3 py-1 rounded border border-cloud-200">HTML5</span>
+                    <span class="bg-cloud-100 text-cloud-700 font-mono text-xs font-bold px-3 py-1 rounded border border-cloud-200">CSS3</span>
+                    <span class="bg-cloud-100 text-cloud-700 font-mono text-xs font-bold px-3 py-1 rounded border border-cloud-200">JavaScript</span>
+                    <span class="bg-cloud-100 text-cloud-700 font-mono text-xs font-bold px-3 py-1 rounded border border-cloud-200">Flask</span>
+                    <span class="bg-cloud-100 text-cloud-700 font-mono text-xs font-bold px-3 py-1 rounded border border-cloud-200">SQLite</span>
+                </div>
 
-                    <div class="modal-section">
-                        <h3>Design &amp; UX Strategy</h3>
-                        <p>The project followed a professional design language, focusing on UI/UX principles to ensure
-                            high readability and desirability. Files were organized into dedicated folders for CSS,
-                            images, and multimedia, maintaining a high standard of professional file management. The
-                            site structure was logically planned to address user needs, from club information tables to
-                            interactive contact features.</p>
-                    </div>
+                <div class="glass-panel-dark p-5 rounded-xl border border-white">
+                    <h3 class="font-display font-bold text-slate-800 uppercase text-base mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-compass text-cloud-500"></i> Project Architecture &amp; Overview
+                    </h3>
+                    <p class="text-slate-600 text-sm font-sans leading-relaxed">
+                        Developed an intergenerational mentoring platform designed to combat social isolation by connecting seniors and youth through shared skills, mutual learning, and digital interaction.
+                    </p>
+                </div>
 
-                    <div class="modal-section">
-                        <h3>Professional Development</h3>
-                        <p>This project was completed alongside the <strong>IBM SkillsBuild Web Development
-                                Fundamentals</strong>, ensuring that development practices aligned with
-                            industry-standard badges in UX and Web Design.</p>
-                    </div>
+                <div class="glass-panel-dark p-5 rounded-xl border border-white">
+                    <h3 class="font-display font-bold text-slate-800 uppercase text-base mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-gear text-cloud-500"></i> Core Engineering Features (Resume Verified)
+                    </h3>
+                    <ul class="space-y-3 text-slate-600 text-sm font-sans">
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-check text-cloud-500 mt-1 text-xs"></i>
+                            <div><strong class="text-slate-800 font-mono">Relational SQLite Database:</strong> Engineered a centralized relational schema to manage user profiles, privacy configurations, communication channels, and community groups.</div>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-check text-cloud-500 mt-1 text-xs"></i>
+                            <div><strong class="text-slate-800 font-mono">Dynamic Skills Marketplace:</strong> Built and deployed an interactive exchange for seniors to teach traditional skills while youth provide digital literacy and mentorship.</div>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-check text-cloud-500 mt-1 text-xs"></i>
+                            <div><strong class="text-slate-800 font-mono">Digital Storytelling Journal:</strong> Multimedia space where seniors preserve memories, life stories, and cultural traditions via text, audio, and images.</div>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-check text-cloud-500 mt-1 text-xs"></i>
+                            <div><strong class="text-slate-800 font-mono">Event Management &amp; Calendars:</strong> Integrated community event scheduling, workshop registrations, and administrative monitoring tools.</div>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- ===================== NOTIFYLEAVE MODAL ===================== -->
-    <div id="notifyleave-modal" class="project-modal">
-        <div class="project-modal-overlay"
-            onclick="document.getElementById('notifyleave-modal').classList.remove('active'); document.body.style.overflow='';">
-        </div>
-        <div class="project-modal-content glass-card">
-            <button class="modal-close"
-                onclick="document.getElementById('notifyleave-modal').classList.remove('active'); document.body.style.overflow='';"
-                aria-label="Close modal">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
-                    <line x1="18" y1="6" x2="6" y2="18" />
-                    <line x1="6" y1="6" x2="18" y2="18" />
-                </svg>
-            </button>
-            <div class="modal-body">
-                <div class="modal-image">
-                    <img src="images/notifyLeave_Webpage.png" alt="NotifyLeave Platform Preview" />
+    <!-- ===================== PHOTOGRAPHY CLUB DETAIL MODAL ===================== -->
+    <div id="photography-modal" class="project-modal" role="dialog" aria-modal="true" aria-labelledby="photography-title">
+        <div class="project-modal-overlay" onclick="closeModal('photography-modal')"></div>
+        <div class="project-modal-content p-6 md:p-8">
+            <div class="flex items-start justify-between border-b border-slate-200/80 pb-4 mb-6">
+                <div>
+                    <div class="flex items-center gap-2 mb-1">
+                        <span class="font-mono text-xs font-bold text-cloud-600 uppercase tracking-widest">// MISSION_03</span>
+                        <span class="bg-blue-100 text-blue-700 font-mono text-[10px] font-bold px-2 py-0.5 rounded border border-blue-200">FRONT-END WEB DEV</span>
+                    </div>
+                    <h2 id="photography-title" class="font-display text-2xl md:text-3xl font-bold text-slate-800 uppercase">Photography Club</h2>
                 </div>
-                <div class="modal-details">
-                    <h2 class="modal-title">NotifyLeave</h2>
-                    <div class="modal-tags">
-                        <span class="tag">React</span>
-                        <span class="tag">Tailwind CSS</span>
-                        <span class="tag">JavaScript</span>
-                        <span class="tag">Node.js</span>
-                        <span class="tag">Express</span>
-                        <span class="tag">MySQL</span>
-                    </div>
+                <button onclick="closeModal('photography-modal')" class="w-10 h-10 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-800 transition-colors flex items-center justify-center" aria-label="Close modal">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
 
-                    <div class="modal-section">
-                        <h3>Project Overview</h3>
-                        <p><strong>Mission:</strong> To simplify and streamline leave management for organizations through a transparent, automated, and configurable system.</p>
-                        <p><strong>Core Concept:</strong> A comprehensive platform where employees apply for leave, managers approve it through a structured two-tier workflow, and HR administrators manage policies, holidays, and permissions.</p>
-                        <p><strong>Key Impact:</strong> Eliminates administrative overhead, ensures fair policy enforcement, and provides clear visibility into team availability for better operational continuity.</p>
-                    </div>
+            <div class="space-y-6">
+                <div class="rounded-xl overflow-hidden border border-white shadow-sm bg-slate-100 max-h-80">
+                    <img src="images/photographyclub_Webpage.png" alt="Photography Club Website Preview" class="w-full h-full object-cover object-top">
+                </div>
 
-                    <div class="modal-section">
-                        <h3>The Problem &amp; Solution</h3>
-                        <p><strong>Challenge:</strong> Managing employee leave manually or through fragmented systems leads to administrative bottlenecks, inaccurate balance tracking, and a lack of real-time visibility into team coverage and headcount shortages.</p>
-                        <p><strong>Solution:</strong> A centralized, automated web application with a robust Role-Based Access Control (RBAC) system that seamlessly handles requests, approvals, balance ledgers, and manpower metrics.</p>
-                    </div>
+                <div class="flex flex-wrap gap-2">
+                    <span class="bg-cloud-100 text-cloud-700 font-mono text-xs font-bold px-3 py-1 rounded border border-cloud-200">HTML5</span>
+                    <span class="bg-cloud-100 text-cloud-700 font-mono text-xs font-bold px-3 py-1 rounded border border-cloud-200">CSS3</span>
+                    <span class="bg-cloud-100 text-cloud-700 font-mono text-xs font-bold px-3 py-1 rounded border border-cloud-200">JavaScript</span>
+                    <span class="bg-cloud-100 text-cloud-700 font-mono text-xs font-bold px-3 py-1 rounded border border-cloud-200">Bootstrap 5</span>
+                </div>
 
-                    <div class="modal-section">
-                        <h3>Key Technical Features</h3>
-                        <ul class="modal-features">
-                            <li><strong>Two-Tier Approval Workflow</strong> — Automated routing of leave requests up the management chain, intelligently skipping managers who are on leave themselves.</li>
-                            <li><strong>Dynamic Leave Ledger</strong> — An append-only balance journal that accurately tracks allocations, usage, carry-overs, and refunds for precise and reliable auditing.</li>
-                            <li><strong>Role-Based Access Control (RBAC)</strong> — Fine-grained, data-driven permission matrix tailored for Employees, Supervisors, Managers, and HR Admins.</li>
-                            <li><strong>Manpower Metrics &amp; Calendars</strong> — Real-time department coverage dashboards and team calendars that flag potential headcount shortages during the approval process.</li>
-                            <li><strong>Region-Aware Configurations</strong> — Supports multi-regional workforces by seamlessly incorporating region-specific public holidays and tailored leave policies.</li>
-                        </ul>
-                    </div>
+                <div class="glass-panel-dark p-5 rounded-xl border border-white">
+                    <h3 class="font-display font-bold text-slate-800 uppercase text-base mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-compass text-cloud-500"></i> Project Architecture &amp; Overview
+                    </h3>
+                    <p class="text-slate-600 text-sm font-sans leading-relaxed">
+                        Designed and coded a fully responsive, multimedia-rich website to market a photography club, strictly adhering to industry-standard IBM SkillsBuild Web Development practices.
+                    </p>
+                </div>
 
-                    <div class="modal-section">
-                        <h3>Outcome &amp; Value</h3>
-                        <p><strong>For Employees:</strong> A frictionless, intuitive experience to request time off, view balances, and track approval statuses.</p>
-                        <p><strong>For Managers:</strong> Context-rich approval screens equipped with advisory flags about team overlaps and coverage, empowering informed decision-making.</p>
-                        <p><strong>Organizational Goal:</strong> Empowering teams with a transparent, reliable, and efficient system so that operational continuity is never compromised.</p>
-                    </div>
+                <div class="glass-panel-dark p-5 rounded-xl border border-white">
+                    <h3 class="font-display font-bold text-slate-800 uppercase text-base mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-gear text-cloud-500"></i> Core Engineering Features (Resume Verified)
+                    </h3>
+                    <ul class="space-y-3 text-slate-600 text-sm font-sans">
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-check text-cloud-500 mt-1 text-xs"></i>
+                            <div><strong class="text-slate-800 font-mono">Interactive Form Logic:</strong> Developed custom-built membership interest forms capturing user input and rendering structured data dynamically on a dedicated response confirmation page.</div>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-check text-cloud-500 mt-1 text-xs"></i>
+                            <div><strong class="text-slate-800 font-mono">Foundational Code Architecture:</strong> Structured strictly using core HTML5, CSS3, and Vanilla JavaScript to validate strong foundational coding logic without unnecessary external bloat.</div>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-check text-cloud-500 mt-1 text-xs"></i>
+                            <div><strong class="text-slate-800 font-mono">Bootstrap 5 Responsive Grid:</strong> Fluid cross-device layout optimization ensuring complete mobile, tablet, and widescreen adaptability.</div>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-check text-cloud-500 mt-1 text-xs"></i>
+                            <div><strong class="text-slate-800 font-mono">Applied UI/UX Principles:</strong> High readability, contrast tuning, organized multimedia directories, and intuitive multi-page navigation.</div>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
 
-    <script src="main.js"></script>
+    <!-- Interactive Scripts -->
+    <script>
+        // Set dynamic current year in footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // ─── Typewriter Effect (Resume Synchronized) ───
+        const roles = [
+            "APPLIED_AI_STUDENT",
+            "DATA_ANALYST",
+            "SOFTWARE_TESTER",
+            "FULL_STACK_DEV",
+            "GAMER_TACTICIAN"
+        ];
+        let roleIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typewriterEl = document.getElementById('typewriter');
+
+        function typeEffect() {
+            const currentRole = roles[roleIndex];
+            
+            if (isDeleting) {
+                typewriterEl.textContent = currentRole.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typewriterEl.textContent = currentRole.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let typeSpeed = isDeleting ? 45 : 95;
+
+            if (!isDeleting && charIndex === currentRole.length) {
+                typeSpeed = 1800; // Pause at full word
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                roleIndex = (roleIndex + 1) % roles.length;
+                typeSpeed = 400; // Pause before new word
+            }
+
+            setTimeout(typeEffect, typeSpeed);
+        }
+        typeEffect();
+
+        // ─── RPG Skill Segments Animation on Scroll ───
+        const skillObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const track = entry.target;
+                    const level = parseInt(track.getAttribute('data-level'), 10);
+                    const max = parseInt(track.getAttribute('data-max') || '10', 10);
+                    
+                    if (track.children.length === 0) {
+                        for (let i = 0; i < max; i++) {
+                            const segment = document.createElement('div');
+                            segment.className = 'skill-segment';
+                            track.appendChild(segment);
+                            
+                            if (i < level) {
+                                setTimeout(() => {
+                                    segment.classList.add('filled');
+                                }, 200 + (i * 90));
+                            }
+                        }
+                    }
+                }
+            });
+        }, { threshold: 0.3 });
+
+        document.querySelectorAll('.skill-track').forEach(track => {
+            skillObserver.observe(track);
+        });
+
+        // ─── Scroll Reveal Intersection Observer ───
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, {
+            threshold: 0.12,
+            rootMargin: "0px 0px -40px 0px"
+        });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // ─── Modal Open / Close Functions ───
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+
+        // Close modal on ESC key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const activeModal = document.querySelector('.project-modal.active');
+                if (activeModal) {
+                    activeModal.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            }
+        });
+
+        // ─── Mobile Menu Toggle ───
+        const navToggle = document.getElementById('nav-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navIcon = document.getElementById('nav-icon');
+
+        if (navToggle && mobileMenu) {
+            navToggle.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                if (mobileMenu.classList.contains('hidden')) {
+                    navIcon.classList.remove('fa-xmark');
+                    navIcon.classList.add('fa-bars');
+                } else {
+                    navIcon.classList.remove('fa-bars');
+                    navIcon.classList.add('fa-xmark');
+                }
+            });
+
+            // Close on link click
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    navIcon.classList.remove('fa-xmark');
+                    navIcon.classList.add('fa-bars');
+                });
+            });
+        }
+
+        // ─── Navbar Scroll & Active Link Spy ───
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('section[id]');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 140;
+                if (window.scrollY >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('data-section') === current) {
+                    link.classList.add('active');
+                }
+            });
+        }, { passive: true });
+
+        // ─── Contact Form AJAX Submission (FormSubmit) ───
+        const contactForm = document.getElementById('contact-form');
+        const submitBtn = document.getElementById('submit-btn');
+        const submitBtnText = document.getElementById('submit-btn-text');
+
+        if (contactForm && submitBtn) {
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                const originalHTML = submitBtn.innerHTML;
+                submitBtn.disabled = true;
+                submitBtn.classList.add('opacity-75');
+                submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> TRANSMITTING_PAYLOAD...';
+
+                const formData = new FormData(contactForm);
+                const data = Object.fromEntries(formData.entries());
+
+                fetch("https://formsubmit.co/ajax/rainietan09022006@gmail.com", {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(res => res.json())
+                .then(result => {
+                    submitBtn.classList.remove('bg-slate-800', 'hover:bg-cloud-500');
+                    submitBtn.classList.add('bg-emerald-600');
+                    submitBtn.innerHTML = '<i class="fa-solid fa-circle-check"></i> TRANSMISSION_CONFIRMED()';
+                    contactForm.reset();
+
+                    setTimeout(() => {
+                        submitBtn.classList.remove('bg-emerald-600', 'opacity-75');
+                        submitBtn.classList.add('bg-slate-800', 'hover:bg-cloud-500');
+                        submitBtn.innerHTML = originalHTML;
+                        submitBtn.disabled = false;
+                    }, 3500);
+                })
+                .catch(err => {
+                    console.error("Form submission failed:", err);
+                    submitBtn.classList.remove('bg-slate-800', 'hover:bg-cloud-500');
+                    submitBtn.classList.add('bg-rose-600');
+                    submitBtn.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> TRANSMISSION_FAILED // RETRY';
+
+                    setTimeout(() => {
+                        submitBtn.classList.remove('bg-rose-600', 'opacity-75');
+                        submitBtn.classList.add('bg-slate-800', 'hover:bg-cloud-500');
+                        submitBtn.innerHTML = originalHTML;
+                        submitBtn.disabled = false;
+                    }, 3500);
+                });
+            });
+        }
+    </script>
 </body>
-
 </html>
