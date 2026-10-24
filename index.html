@@ -88,7 +88,7 @@
             background-image: radial-gradient(#94a3b8 1px, transparent 1px);
             background-size: 40px 40px;
             opacity: 0.22;
-            z-index: -2;
+            z-index: 2;
             pointer-events: none;
         }
 
@@ -97,15 +97,16 @@
             position: fixed;
             border-radius: 50%;
             filter: blur(100px);
-            z-index: -3;
+            z-index: 1;
             opacity: 0.6;
+            pointer-events: none;
         }
 
         /* Advanced Cloud System - Continuous Left-to-Right Drift */
         .cloud-system {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
-            z-index: -1;
+            z-index: 3;
             pointer-events: none;
             overflow: hidden;
         }
@@ -522,7 +523,7 @@
     </nav>
 
     <!-- Hero Section -->
-    <section id="hero" class="min-h-screen flex items-center justify-center relative pt-24 pb-16 px-6">
+    <section id="hero" class="min-h-screen flex items-center justify-center relative z-10 pt-24 pb-16 px-6">
         <div class="z-10 w-full max-w-5xl relative">
             <!-- Decorative HUD Telemetry -->
             <div class="absolute top-0 right-0 font-mono text-xs text-slate-500 hidden md:block text-right">
