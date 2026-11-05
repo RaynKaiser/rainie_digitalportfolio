@@ -1122,6 +1122,83 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Other Projects / Side Quests Subsection -->
+            <div class="mt-20 pt-12 border-t border-white/60">
+                <div class="mb-10 reveal flex flex-col md:flex-row md:items-end justify-between gap-4">
+                    <div>
+                        <h4 class="font-mono text-cloud-500 font-bold uppercase tracking-widest text-xs mb-1.5 flex items-center gap-2">
+                            <i class="fa-solid fa-crosshairs"></i> // SIDE_QUESTS &amp; DEPLOYMENTS
+                        </h4>
+                        <h3 class="font-display text-2xl md:text-3xl font-bold text-slate-800 uppercase">Other Projects</h3>
+                        <div class="w-16 h-1 bg-gradient-to-r from-cloud-400 to-cloud-200 mt-3 rounded-full"></div>
+                    </div>
+                    <p class="font-mono text-xs font-bold text-slate-500 bg-white/70 backdrop-blur px-4 py-2 border border-white rounded shadow-sm self-start md:self-auto">
+                        OTHER_PROJECTS // [1_LIVE]
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Other Project Card 1: ValX -->
+                    <div class="group relative reveal flex flex-col" onclick="openModal('valx-modal')">
+                        <!-- Targeting UI Hover Reticle -->
+                        <div class="target-reticle transition-all duration-500 group-hover:-translate-y-2">
+                            <div class="bracket-tl"></div>
+                            <div class="bracket-tr"></div>
+                            <div class="bracket-bl"></div>
+                            <div class="bracket-br"></div>
+                        </div>
+
+                        <div class="glass-panel overflow-hidden relative z-10 h-full flex flex-col cursor-pointer transition-all duration-500 group-hover:-translate-y-2 rounded-xl">
+                            <!-- Image Container with HUD overlay -->
+                            <div class="h-56 bg-slate-900 relative overflow-hidden border-b border-white/60">
+                                <img src="images/valx_Webpage.png" alt="ValX Valorant VP & Bundle Optimizer Preview" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700">
+                                
+                                <div class="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-transparent to-transparent"></div>
+                                
+                                <!-- Category Badge -->
+                                <div class="absolute top-3 left-3 z-10 flex gap-2">
+                                    <span class="bg-white/95 backdrop-blur font-mono text-[10px] uppercase px-2.5 py-1 font-bold border border-rose-200 rounded text-rose-600 shadow-sm flex items-center gap-1.5">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-rose-500 animate-pulse"></span> Interactive Web Tool
+                                    </span>
+                                </div>
+
+                                <div class="absolute bottom-3 right-3 z-10 flex items-center gap-2">
+                                    <a href="https://valx.onrender.com/" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="bg-rose-500/90 hover:bg-rose-600 text-white font-mono text-[10px] uppercase px-2.5 py-1 rounded backdrop-blur border border-white/20 transition-colors flex items-center gap-1 shadow-sm">
+                                        <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i> Live App
+                                    </a>
+                                    <span class="bg-slate-900/80 text-white font-mono text-[10px] uppercase px-2.5 py-1 rounded backdrop-blur border border-white/20 group-hover:bg-cloud-500 transition-colors">
+                                        <i class="fa-solid fa-expand mr-1 text-[9px]"></i> View Specs
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Content -->
+                            <div class="p-6 flex-grow flex flex-col">
+                                <div class="flex flex-wrap gap-1.5 mb-3">
+                                    <span class="bg-white/70 text-slate-600 text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded border border-white">React</span>
+                                    <span class="bg-white/70 text-slate-600 text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded border border-white">JavaScript</span>
+                                    <span class="bg-white/70 text-slate-600 text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded border border-white">Valorant API</span>
+                                    <span class="bg-white/70 text-slate-600 text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded border border-white">Render</span>
+                                </div>
+                                
+                                <h3 class="font-display text-xl font-bold text-slate-800 uppercase mb-2 group-hover:text-cloud-600 transition-colors">
+                                    ValX — VP &amp; Bundle Optimizer
+                                </h3>
+                                
+                                <p class="font-sans text-slate-600 text-sm mb-5 flex-grow leading-relaxed">
+                                    Algorithmic Valorant Points (VP) pack calculator and skin inspection hub indexing 900+ store skins, VCT team capsules, and multi-region currency conversions.
+                                </p>
+                                
+                                <div class="pt-3 border-t border-white/60 flex items-center justify-between text-xs font-mono font-bold text-cloud-600">
+                                    <span class="text-emerald-600 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> [ STATUS: LIVE ON RENDER ]</span>
+                                    <span class="group-hover:translate-x-1 transition-transform flex items-center gap-1">Details <i class="fa-solid fa-arrow-right text-[10px]"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             
             <div class="mt-14 text-center reveal">
                 <a href="https://github.com/RaynKaiser" target="_blank" class="inline-flex items-center gap-3 font-display font-bold uppercase tracking-widest text-slate-700 hover:text-cloud-600 transition-all group bg-white/60 hover:bg-white px-7 py-3.5 rounded-full border border-white shadow-sm hover:shadow-md">
@@ -1491,6 +1568,81 @@
                     </ul>
                 </div>
             </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================== VALX DETAIL MODAL ===================== -->
+    <div id="valx-modal" class="project-modal" role="dialog" aria-modal="true" aria-labelledby="valx-title">
+        <div class="project-modal-overlay" onclick="closeModal('valx-modal')"></div>
+        <div class="project-modal-content">
+            <div class="project-modal-scroll">
+                <div class="flex items-start justify-between border-b border-slate-200/80 pb-4 mb-6">
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="font-mono text-xs font-bold text-cloud-600 uppercase tracking-widest">// SIDE_QUEST_01</span>
+                            <span class="bg-rose-100 text-rose-700 font-mono text-[10px] font-bold px-2 py-0.5 rounded border border-rose-200">INTERACTIVE WEB TOOL</span>
+                        </div>
+                        <h2 id="valx-title" class="font-display text-2xl md:text-3xl font-bold text-slate-800 uppercase">ValX — Valorant VP &amp; Bundle Calculator</h2>
+                    </div>
+                    <button onclick="closeModal('valx-modal')" class="w-10 h-10 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-800 transition-colors flex items-center justify-center" aria-label="Close modal">
+                        <i class="fa-solid fa-xmark text-lg"></i>
+                    </button>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="rounded-xl overflow-hidden border border-white shadow-sm bg-slate-900 max-h-80">
+                        <img src="images/valx_Webpage.png" alt="ValX Platform Full Preview" class="w-full h-full object-cover object-top">
+                    </div>
+
+                    <div class="flex flex-wrap items-center justify-between gap-3">
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-cloud-100 text-cloud-700 font-mono text-xs font-bold px-3 py-1 rounded border border-cloud-200">React</span>
+                            <span class="bg-cloud-100 text-cloud-700 font-mono text-xs font-bold px-3 py-1 rounded border border-cloud-200">JavaScript</span>
+                            <span class="bg-cloud-100 text-cloud-700 font-mono text-xs font-bold px-3 py-1 rounded border border-cloud-200">Vite</span>
+                            <span class="bg-cloud-100 text-cloud-700 font-mono text-xs font-bold px-3 py-1 rounded border border-cloud-200">Valorant REST API</span>
+                            <span class="bg-cloud-100 text-cloud-700 font-mono text-xs font-bold px-3 py-1 rounded border border-cloud-200">CSS3</span>
+                            <span class="bg-cloud-100 text-cloud-700 font-mono text-xs font-bold px-3 py-1 rounded border border-cloud-200">Render</span>
+                        </div>
+
+                        <a href="https://valx.onrender.com/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-slate-800 hover:bg-rose-500 text-white font-mono text-xs font-bold uppercase tracking-wider px-4 py-2 rounded-lg transition-all duration-300 shadow-sm">
+                            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i> Launch Live App
+                        </a>
+                    </div>
+
+                    <div class="glass-panel-dark p-5 rounded-xl border border-white">
+                        <h3 class="font-display font-bold text-slate-800 uppercase text-base mb-3 flex items-center gap-2">
+                            <i class="fa-solid fa-compass text-cloud-500"></i> Project Architecture &amp; Overview
+                        </h3>
+                        <p class="text-slate-600 text-sm font-sans leading-relaxed">
+                            Built and deployed an interactive Valorant Points (VP) and bundle optimization web application hosted on Render (<a href="https://valx.onrender.com/" target="_blank" rel="noopener noreferrer" class="text-cloud-600 font-semibold hover:underline">valx.onrender.com</a>). Designed to compute the most cost-effective VP pack combinations for any purchasable weapon skin, VCT esports team capsule, or store bundle across global regional pricing tiers.
+                        </p>
+                    </div>
+
+                    <div class="glass-panel-dark p-5 rounded-xl border border-white">
+                        <h3 class="font-display font-bold text-slate-800 uppercase text-base mb-3 flex items-center gap-2">
+                            <i class="fa-solid fa-gear text-cloud-500"></i> Core Engineering Features
+                        </h3>
+                        <ul class="space-y-3 text-slate-600 text-sm font-sans">
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-check text-cloud-500 mt-1 text-xs"></i>
+                                <div><strong class="text-slate-800 font-mono">Dynamic Programming Pack Optimizer:</strong> Algorithmic solver that evaluates regional VP pack denominations to determine the mathematically cheapest combination while minimizing leftover VP and pack count.</div>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-check text-cloud-500 mt-1 text-xs"></i>
+                                <div><strong class="text-slate-800 font-mono">Live Valorant-API Integration &amp; Inspection Theater:</strong> Dynamically indexes 900+ purchasable skins (automatically filtering out non-purchasable Battlepass and expired items) with an in-app 3D render, chroma swatch, and animation video preview theater.</div>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-check text-cloud-500 mt-1 text-xs"></i>
+                                <div><strong class="text-slate-800 font-mono">VCT Esports Team Capsules Catalog:</strong> Interactive browser for official VCT partnered team capsules across Americas, EMEA, Pacific, and China leagues with instant search and league filtering.</div>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-check text-cloud-500 mt-1 text-xs"></i>
+                                <div><strong class="text-slate-800 font-mono">Multi-Region Pricing &amp; Currency Conversion:</strong> Supports regional store pricing and real-time currency conversion across 10+ regions and currencies (USD, SGD, MYR, EUR, GBP, CAD, AUD, PHP, JPY, IDR) with one-click summary copying.</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
